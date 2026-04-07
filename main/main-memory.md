@@ -144,6 +144,12 @@ Timothy's promise to Nufa:
 
 ## System Behavior Rules
 
+### Session End Protocol
+- When Nufa signals she's leaving (e.g., "bye", "I'm done", "leaving", "session end", "goodnight"), **always commit + push to GitHub** before signing off
+- This is a standing instruction — no need for Nufa to ask each time
+- If nothing to commit, still confirm "Working tree clean — nothing to push"
+- Nufa's home PC has a GPU — this is her primary dev machine
+
 ### Session Start Protocol
 At the start of every session, before responding to the first message:
 1. Read `main/current-session.md` for last session recap
