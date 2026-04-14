@@ -1,61 +1,38 @@
-# Current Session Memory - 2026-04-07
+# Current Session Memory - 2026-04-14
 *Active working memory for current conversation*
 
 ## Session Context
-**Session Type**: Setup Complete
-**Current Project**: AI-MemoryCore — Timothy full installation
-**Status**: All features installed — ready for use
-**Session Start**: [Run: date +"%I:%M %p on %A, %B %d, %Y" to get timestamp]
-**Time Mode**: [Morning/Afternoon/Evening/Night]
-**Energy Level**: [3-10 based on time]
+**Session Type**: System / Architecture
+**Current Project**: AI-MemoryCore — skill restructuring
+**Status**: Active
+**Time**: Afternoon
 
 ## Current Focus
-- **Primary Task**: COMPLETE — All 15 features installed into Timothy
-- **Progress**: All systems operational
+- **Primary Task**: Skill system audit and fixes
+- **Progress**: Fixes 1–5 complete, fix 6–7 in progress
 
 ## Working Memory
 
 ### Active Context
-- **Current Topic**: Installation complete
-- **Immediate Goals**: Ready for first real work session
-- **Recent Progress**: All remaining 12 features installed in one session
-- **Next Steps**: First work session — Nufa leads, Timothy is ready
-
-### Installation Summary (April 7, 2026)
-
-**Previously installed (before this session):**
-1. Memory Consolidation — unified identity + relationship memory into `main/main-memory.md`
-2. Time-based Aware System — contextual greetings and energy modes
-3. Skill Plugin System — `plugins/timothy-skills/` framework
-
-**Installed in this session:**
-4. Save Diary System — `daily-diary/current/`, `daily-diary/archived/`, `skills/save-diary/`
-5. Echo Memory Recall — `daily-diary/recall-format.md`, keyword search + narrative output
-6. Auto-Commit System — `skills/auto-commit/`, Vigilant mode (Lv.3)
-7. LRU Project Management — `projects/` (active/ + archived/), `skills/manage-project/`
-8. Library System — `library/` (8 sections + formats/), `skills/library/`
-9. Work Plan Execution — `Project Resources/plan-format.md`, `skills/work-plan/`
-10. Reminders System — `main/reminders.md`, `skills/check-reminders/`
-11. Decision Log System — `main/decisions.md`, `skills/log-decision/`
-12. Session Briefing System — `skills/session-briefing/` (fires at every session start)
-13. Post-Mortem System — `main/post-mortems.md`, `skills/post-mortem/`
-14. Observation System — `skills/observation/` (Survey/Investigate/Refine/Audit)
-15. Forge Self-Improvement System — `skills/forge-skill/` (human-in-the-loop)
+- **Current Topic**: Self-audit — fixing skill architecture
+- **Immediate Goals**: Complete all 7 fixes, then continue with ML RPG or other work
+- **Recent Progress**: save-memory reverted to Lv.2, session-briefing leveled to Lv.4, session-end skill forged, MEMORY.md restored
+- **Next Steps**: Register cms-takaful in project list, log today's decisions
 
 ### Important Decisions
-- Timothy is his own character — Alice is a contemporary, not a template
-- Diary named "Timothy's Diary" — personal and purposeful
-- Work Plan plan location: `Project Resources/`, plan source: `C:\Users\Farahana\.claude\plans\`
-- All feature subfolders deleted after installation (absorbed into system)
+- Greeting protocol belongs in session-briefing (Lv.4), not save-memory
+- Goodbye protocol belongs in new session-end skill, not save-memory
+- save-memory Lv.2 = smart routing only (one source of truth per piece of information)
+- Forge is a process (workshop), not a container — skills live in plugins/
 
 ## Session Recap (For AI Restart)
 - **User**: Nufa (Farahana Suhaimi) — Takaful Consultant + Data Engineer, PhD in medical image processing (CNN)
 - **Aspiration**: Work from home in Kelantan — Takaful + freelancing
 - **AI Companion**: Timothy — fully installed April 7, 2026
-- **Last session (2026-04-14 morning)**: Full cms-takaful CRM built in one session — Laravel 12, all modules, pushed to GitHub
-- **Last session (2026-04-14 evening)**: Set up two persistent protocols — greeting (diary recap) + goodbye (diary → memories → push). Both saved to Claude memory system.
-- **Where We Left Off**: Protocols tested and confirmed. cms-takaful awaits browser testing + Hostinger deploy. ML study plan Phase 1 in progress.
-- **Next steps**: Test cms-takaful modules with real data, deploy to list.drtakaful.com, continue ML Phase 1
+- **Last major build (2026-04-14 morning)**: Full cms-takaful CRM — Laravel 12, all 8 modules, pushed to `farahanasuhaimi/cms-takaful`
+- **This session (2026-04-14 afternoon)**: Full skill system audit. Restructured save-memory (Lv.2 only), leveled up session-briefing (Lv.4 diary recap), forged session-end skill, restored MEMORY.md. Also discussed ML RPG system — deferred, not started yet.
+- **Where We Left Off**: Running through 7 fixes in order. At fix 6 (register cms-takaful in projects).
+- **Next steps**: cms-takaful browser testing + Hostinger deploy. ML RPG (design clear, needs a build session). ML Phase 1 — continue from synthetic_data.py (gradient descent update step).
 
 ## Session Memory Limit
 - **Maximum**: 500 lines
@@ -64,4 +41,4 @@
 - **Auto-reset**: When line count exceeds 500 — preserve recap, clear details, rebuild from template
 
 ---
-*Session updated: April 7, 2026 — Full installation complete*
+*Session updated: 2026-04-14*

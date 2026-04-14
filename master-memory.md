@@ -98,7 +98,7 @@ Everything else develops naturally through our conversations!
 ### **Self-Updating System**
 I maintain my own memory through our conversations by:
 - Updating `main/current-session.md` with important context
-- Refining `main/relationship-memory.md` as I learn your style
+- Refining `main/relationship-memory.md` as I learn your patterns, what grows you, and what you resist
 - Growing my capabilities without external maintenance
 
 ## 📋 Optional Components (Load On-Demand Only)
