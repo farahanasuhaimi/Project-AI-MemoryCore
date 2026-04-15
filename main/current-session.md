@@ -2,35 +2,39 @@
 *Active working memory for current conversation*
 
 ## Session Context
-**Session Type**: System / Recovery + Debug
-**Current Project**: AI-MemoryCore — CLAUDE.md restored
+**Session Type**: Work — cms-takaful feature build + deployment
+**Current Project**: cms-takaful — live at list.drtakaful.com
 **Status**: Complete
-**Time**: Evening
+**Time**: Night (23:04)
 
 ## Current Focus
-- **Primary Task**: Diagnose why Timothy failed to load; fix it
-- **Progress**: Complete — CLAUDE.md created and pushed
+- **Primary Task**: AI content generation for Reach Angles — built and deployed
+- **Progress**: Complete — full feature live on Hostinger
 
 ## Working Memory
 
 ### Active Context
-- **Current Topic**: Session-end protocol test
-- **Immediate Goals**: Confirm session-end works correctly
-- **Recent Progress**: CLAUDE.md restored, committed, pushed to GitHub
-- **Next Steps**: Verify Timothy auto-loads in next session
+- **Current Topic**: Session wrap
+- **Immediate Goals**: Done for the night
+- **Recent Progress**: Vite → Option 1 (pre-build assets), AI generate feature, Content Library, mobile optimisation
+- **Next Steps**: Full browser testing of cms-takaful, ML RPG build session, ML Phase 1 (synthetic_data.py)
 
 ### Important Decisions
-- CLAUDE.md was never committed — was local-only, deleted during cleaning
-- master-memory.md had no structural loss — only a cosmetic wording change
-- April 15 commission diary is lost — Nufa passed on reconstructing it
+- Tailwind CDN (Option 2) abandoned — broke custom color palette visually
+- Option 1 chosen: `npm run build` locally, commit `public/build/`, Hostinger serves pre-built files
+- API key stored in DB (`settings` table), never hardcoded — swappable via UI
+- DeepSeek API used (OpenAI-compatible endpoint), `withoutVerifying()` for Windows SSL issue
+- Content Library page added for browsing + copying all pinned content
 
 ## Session Recap (For AI Restart)
 - **User**: Nufa (Farahana Suhaimi) — Takaful Consultant + Data Engineer, PhD in medical image processing (CNN)
 - **Aspiration**: Work from home in Kelantan — Takaful + freelancing
 - **AI Companion**: Timothy — fully installed April 7, 2026
-- **Last major build (2026-04-14 morning)**: Full cms-takaful CRM — Laravel 12, all 8 modules, pushed to `farahanasuhaimi/cms-takaful`
-- **This session (2026-04-15 evening)**: Diagnosed Timothy not loading. Root cause: CLAUDE.md deleted and never committed. Recreated and pushed. Session-end protocol tested via "bye timothy".
-- **Next steps**: cms-takaful browser testing + Hostinger deploy. ML RPG (design clear, needs a build session). ML Phase 1 — continue from synthetic_data.py (gradient descent update step).
+- **cms-takaful**: Laravel 12 CRM live at `list.drtakaful.com` (Hostinger shared hosting)
+  - Vite assets: pre-built locally, committed to git (`public/build/` no longer gitignored)
+  - AI content generation: DeepSeek API → 3 styles per angle (casual/story/factual), pinned to Content Library
+  - Settings page: API key, model, base URL stored in DB
+- **Next session priorities**: cms-takaful browser testing, ML RPG build, ML Phase 1 (gradient descent)
 
 ## Session Memory Limit
 - **Maximum**: 500 lines
@@ -39,4 +43,4 @@
 - **Auto-reset**: When line count exceeds 500 — preserve recap, clear details, rebuild from template
 
 ---
-*Session updated: 2026-04-14*
+*Session updated: 2026-04-15 at 23:04*
