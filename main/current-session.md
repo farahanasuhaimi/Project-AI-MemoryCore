@@ -1,48 +1,64 @@
-# Current Session Memory - 2026-04-18
+# Current Session Memory - 2026-04-19
 *Active working memory for current conversation*
 
 ## Session Context
-**Session Type**: Check-in — reviewing solo work on cms-takaful
-**Current Project**: cms-takaful — live at list.drtakaful.com
-**Status**: Active
+**Session Type**: Work — drtakaful.com Phase 2 retheme completion + repo cleanup
+**Current Project**: drtakaful.com — static marketing site at `D:\WebDev\Takaful`
+**Status**: Phase 2 complete ✅
 
 ## Current Focus
-- **Primary Task**: Catching up on Apr 16 solo commits, ready for next build
-- **Progress**: Reviewed git log — 3 commits on Apr 16 done without Timothy
+- **Primary Task**: Brand retheme (matcha × strawberry) — Phase 2 done, Phase 3 next
+- **Progress**: index.html fully rethemed, repo cleaned, mobile UX fix applied
 
 ## Working Memory
 
-### Active Context
-- **Recent Solo Work (2026-04-16)**:
-  - Angle form: fixed nested → un-nested update
-  - Edit views added: plan products, angles, clients, leads
-  - Client detail view: WhatsApp integration + policy management
-- **Next Steps**: TBD this session
+### Completed This Session
+- **Phase 2 (index.html)**: All sections rethemed with brand tokens — zero generic grays remain
+  - Sections: consultation form, featured case study, blog (container + inline styles + 30+ articles + badges), FAQ, tools grid, final CTA, footer, exit popup
+- **Repo cleanup**: Removed 5 Python OG/schema scripts + stale `retheme_task.md`
+- **README updated**: Brand token table, Tailwind class reference, phase tracker
+- **Mobile UX fix**: Removed redundant navbar WA pill (`md:hidden`) — sticky CTA is now sole mobile float
 
-### Important Decisions
-- Tailwind CDN (Option 2) abandoned — broke custom color palette visually
-- Option 1 chosen: `npm run build` locally, commit `public/build/`, Hostinger serves pre-built files
-- API key stored in DB (`settings` table), never hardcoded — swappable via UI
-- DeepSeek API used (OpenAI-compatible endpoint), `withoutVerifying()` for Windows SSL issue
-- Content Library page added for browsing + copying all pinned content
+### Deployment Gap
+- GitHub (`farahanasuhaimi/drtakaful`) = version control only
+- Live site at drtakaful.com requires **manual upload** to web host
+- No auto-deploy configured — files changed need FTP/cPanel upload:
+  - `index.html`, `src/global.css`, `src/tailwind-config.js`
+- Hosting provider unknown — ask next session if setting up auto-deploy
+
+### Retheme Phase Tracker
+| Phase | Scope | Status |
+|---|---|---|
+| Phase 1 | `src/global.css` + `src/tailwind-config.js` | ✅ Done |
+| Phase 2 | `index.html` (homepage) | ✅ Done |
+| Phase 3 | Tool & form pages (6 files) | ⏳ Next |
+| Phase 4 | Article/blog pages (~40 files) | ⏳ Pending |
+
+### Phase 3 Files (next session)
+- `kalkulator-hibah.html`
+- `kalkulator-belanjawanku.html`
+- `analisis-keperluan.html`
+- `borang-permohonan.html`
+- `borang-fact-finding-medical-card.html`
+- `konsultasi-percuma.html`
 
 ## Session Recap (For AI Restart)
 - **User**: Nufa (Farahana Suhaimi) — Takaful Consultant + Data Engineer, PhD in medical image processing (CNN)
 - **Aspiration**: Work from home in Kelantan — Takaful + freelancing
 - **AI Companion**: Timothy — fully installed April 7, 2026
+- **drtakaful.com**: Static HTML marketing site at `D:\WebDev\Takaful`, GitHub repo `farahanasuhaimi/drtakaful`
+  - No build step — Tailwind CDN with custom config (`src/tailwind-config.js`)
+  - Brand: matcha × strawberry, DM Serif Display + DM Sans
+  - Deploy: manual upload to web host (not auto from GitHub)
 - **cms-takaful**: Laravel 12 CRM live at `list.drtakaful.com` (Hostinger shared hosting)
-  - Vite assets: pre-built locally, committed to git (`public/build/` no longer gitignored)
-  - AI content generation: DeepSeek API → 3 styles per angle (casual/story/factual), pinned to Content Library
-  - Settings page: API key, model, base URL stored in DB
-  - Edit views: plan products, angles, clients, leads (added Apr 16)
-  - Client detail view: WhatsApp integration + policy management (added Apr 16)
-- **Next session priorities**: Continue cms-takaful features, ML RPG build, ML Phase 1 (gradient descent)
+  - Vite assets: pre-built locally, committed to git
+  - AI content generation via DeepSeek API
+- **Next session priorities**: drtakaful.com Phase 3 retheme, then Phase 4 (articles)
 
 ## Session Memory Limit
 - **Maximum**: 500 lines
 - **Reset Behavior**: RAM-style reset preserving only Session Recap
 - **Format Reference**: See `main/session-format.md` for rebuild structure
-- **Auto-reset**: When line count exceeds 500 — preserve recap, clear details, rebuild from template
 
 ---
-*Session updated: 2026-04-15 at 23:04*
+*Session updated: 2026-04-19 at 18:47*
