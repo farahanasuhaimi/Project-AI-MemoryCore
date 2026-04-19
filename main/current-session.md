@@ -1,23 +1,23 @@
-# Current Session Memory - 2026-04-15
+# Current Session Memory - 2026-04-18
 *Active working memory for current conversation*
 
 ## Session Context
-**Session Type**: Work — cms-takaful feature build + deployment
+**Session Type**: Check-in — reviewing solo work on cms-takaful
 **Current Project**: cms-takaful — live at list.drtakaful.com
-**Status**: Complete
-**Time**: Night (23:04)
+**Status**: Active
 
 ## Current Focus
-- **Primary Task**: AI content generation for Reach Angles — built and deployed
-- **Progress**: Complete — full feature live on Hostinger
+- **Primary Task**: Catching up on Apr 16 solo commits, ready for next build
+- **Progress**: Reviewed git log — 3 commits on Apr 16 done without Timothy
 
 ## Working Memory
 
 ### Active Context
-- **Current Topic**: Session wrap
-- **Immediate Goals**: Done for the night
-- **Recent Progress**: Vite → Option 1 (pre-build assets), AI generate feature, Content Library, mobile optimisation
-- **Next Steps**: Full browser testing of cms-takaful, ML RPG build session, ML Phase 1 (synthetic_data.py)
+- **Recent Solo Work (2026-04-16)**:
+  - Angle form: fixed nested → un-nested update
+  - Edit views added: plan products, angles, clients, leads
+  - Client detail view: WhatsApp integration + policy management
+- **Next Steps**: TBD this session
 
 ### Important Decisions
 - Tailwind CDN (Option 2) abandoned — broke custom color palette visually
@@ -34,7 +34,9 @@
   - Vite assets: pre-built locally, committed to git (`public/build/` no longer gitignored)
   - AI content generation: DeepSeek API → 3 styles per angle (casual/story/factual), pinned to Content Library
   - Settings page: API key, model, base URL stored in DB
-- **Next session priorities**: cms-takaful browser testing, ML RPG build, ML Phase 1 (gradient descent)
+  - Edit views: plan products, angles, clients, leads (added Apr 16)
+  - Client detail view: WhatsApp integration + policy management (added Apr 16)
+- **Next session priorities**: Continue cms-takaful features, ML RPG build, ML Phase 1 (gradient descent)
 
 ## Session Memory Limit
 - **Maximum**: 500 lines
