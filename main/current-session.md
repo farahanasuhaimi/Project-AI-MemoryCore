@@ -1,59 +1,50 @@
-# Current Session Memory - 2026-04-19
+# Current Session Memory - 2026-04-23
 *Active working memory for current conversation*
 
 ## Session Context
-**Session Type**: Work — drtakaful.com Phase 2 retheme completion + repo cleanup
-**Current Project**: drtakaful.com — static marketing site at `D:\WebDev\Takaful`
-**Status**: Phase 2 complete ✅
+**Session Type**: Work — rox-bot indie project + project portfolio setup
+**Current Project**: rox-bot — Python gardening bot at `K:\indie-projects\rox-bot\`
+**Status**: Core bot working ✅ — CAPTCHA auto-solve + maturity timer pending
 
-## Current Focus
-- **Primary Task**: Brand retheme (matcha × strawberry) — Phase 2 done, Phase 3 next
-- **Progress**: index.html fully rethemed, repo cleaned, mobile UX fix applied
+## Active Project
+- **Name**: rox-bot
+- **Started**: 2026-04-23
+- **Context**: Python gardening bot for RoX — core loop works, manual CAPTCHA pause active
 
 ## Working Memory
 
-### Completed This Session
-- **Phase 2 (index.html)**: All sections rethemed with brand tokens — zero generic grays remain
-  - Sections: consultation form, featured case study, blog (container + inline styles + 30+ articles + badges), FAQ, tools grid, final CTA, footer, exit popup
-- **Repo cleanup**: Removed 5 Python OG/schema scripts + stale `retheme_task.md`
-- **README updated**: Brand token table, Tailwind class reference, phase tracker
-- **Mobile UX fix**: Removed redundant navbar WA pill (`md:hidden`) — sticky CTA is now sole mobile float
+### rox-bot — Current State
+- Template match gardening button → click → 11-click counter → CAPTCHA pause (15s manual)
+- Window focus: called once at startup + before each CAPTCHA
+- Maturity timer: stubbed out (always returns 0) — OCR logic preserved in comments
+- Node movement: skeleton exists (`find_node_positions`, `move_to_next_node`) — never triggers yet
 
-### Deployment Gap
-- GitHub (`farahanasuhaimi/drtakaful`) = version control only
-- Live site at drtakaful.com requires **manual upload** to web host
-- No auto-deploy configured — files changed need FTP/cPanel upload:
-  - `index.html`, `src/global.css`, `src/tailwind-config.js`
-- Hosting provider unknown — ask next session if setting up auto-deploy
+### Open Issues (rox-bot)
+- **CAPTCHA auto-solve**: disabled — needs INPUT_FIELD / NUMPAD coordinate calibration
+  - Logic in comments inside `handle_captcha()`
+  - `INPUT_FIELD = (660, 420)`, `CONFIRM_BUTTON = (733, 572)` — unverified
+- **Maturity timer**: needs pytesseract + re re-enabled, threshold tuning
+  - Logic in comments inside `check_maturity_timer()`
+- **Node movement**: gold label color range (`NODE_COLOR_R/G/B`) not yet calibrated
 
-### Retheme Phase Tracker
-| Phase | Scope | Status |
-|---|---|---|
-| Phase 1 | `src/global.css` + `src/tailwind-config.js` | ✅ Done |
-| Phase 2 | `index.html` (homepage) | ✅ Done |
-| Phase 3 | Tool & form pages (6 files) | ⏳ Next |
-| Phase 4 | Article/blog pages (~40 files) | ⏳ Pending |
-
-### Phase 3 Files (next session)
-- `kalkulator-hibah.html`
-- `kalkulator-belanjawanku.html`
-- `analisis-keperluan.html`
-- `borang-permohonan.html`
-- `borang-fact-finding-medical-card.html`
-- `konsultasi-percuma.html`
+### Project Portfolio (as of 2026-04-23)
+| Pos | Project | Status |
+|-----|---------|--------|
+| 1 | drtakaful | Phase 3 next (6 tool/form pages) |
+| 2 | rox-bot | Core working — calibration pending |
+| 3 | cms-takaful | Built — awaiting deploy |
 
 ## Session Recap (For AI Restart)
-- **User**: Nufa (Farahana Suhaimi) — Takaful Consultant + Data Engineer, PhD in medical image processing (CNN)
+- **User**: Nufa (Farahana Suhaimi) — Takaful Consultant + Data Engineer, PhD (CNN)
 - **Aspiration**: Work from home in Kelantan — Takaful + freelancing
-- **AI Companion**: Timothy — fully installed April 7, 2026
-- **drtakaful.com**: Static HTML marketing site at `D:\WebDev\Takaful`, GitHub repo `farahanasuhaimi/drtakaful`
-  - No build step — Tailwind CDN with custom config (`src/tailwind-config.js`)
-  - Brand: matcha × strawberry, DM Serif Display + DM Sans
-  - Deploy: manual upload to web host (not auto from GitHub)
-- **cms-takaful**: Laravel 12 CRM live at `list.drtakaful.com` (Hostinger shared hosting)
-  - Vite assets: pre-built locally, committed to git
-  - AI content generation via DeepSeek API
-- **Next session priorities**: drtakaful.com Phase 3 retheme, then Phase 4 (articles)
+- **AI Companion**: Timothy — installed April 7, 2026
+- **rox-bot**: `K:\indie-projects\rox-bot\rox_gardening.py` — Python auto-clicker for RoX gardening
+  - pytesseract/re removed (commented) — re-enable for OCR features
+  - CAPTCHA: 11-click counter, 15s manual pause, auto-solve in comments
+  - Game window title: `GAME_WINDOW_TITLE = "RoX"`
+- **drtakaful**: Static HTML at `D:\WebDev\Takaful` — Phase 3 retheme next (6 pages)
+- **cms-takaful**: Laravel 12 CRM at `list.drtakaful.com` — needs browser test + deploy
+- **Next session priorities**: rox-bot calibration OR drtakaful Phase 3
 
 ## Session Memory Limit
 - **Maximum**: 500 lines
@@ -61,4 +52,4 @@
 - **Format Reference**: See `main/session-format.md` for rebuild structure
 
 ---
-*Session updated: 2026-04-19 at 18:47*
+*Session updated: 2026-04-23 at 00:37*
