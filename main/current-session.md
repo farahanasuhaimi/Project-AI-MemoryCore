@@ -1,23 +1,37 @@
-# Current Session Memory - 2026-04-24
+# Current Session Memory - 2026-04-25
 *Active working memory for current conversation*
 
 ## Session Context
-**Session Type**: Work — rox-bot CAPTCHA auto-solve calibration
+**Session Type**: Work — rox-bot OCR debugging (continued)
 **Current Project**: rox-bot — `K:\indie-projects\rox-bot\rox_gardening.py`
-**Status**: Auto-solve code enabled ✅ — OCR test pending
+**Status**: 3 bugs fixed — final test pending
 
 ## Active Project
 - **Name**: rox-bot
 - **Started**: 2026-04-23
-- **Context**: Python gardening bot for RoX — CAPTCHA auto-solve wired up, needs OCR verification
+- **Context**: Python gardening bot for RoX — CAPTCHA auto-solve pipeline iteratively debugged
 
 ## Working Memory
 
 ### rox-bot — Current State
-- All CAPTCHA coordinates calibrated from live 4K screenshot pixel analysis
-- `handle_captcha()` fully rewritten — OCR → solve → numpad click → confirm
-- Tesseract v5.5.0 installed at `C:\Program Files\Tesseract-OCR\` ✓
-- OCR test incomplete — popup wasn't visible when test screenshot was taken
+- `ocr_expression()` pipeline: projection-based island detection → valley split → digit OCR
+- All 3 known bugs fixed this session (see below)
+- **NOT YET TESTED** with final fix applied — user left before running the last test
+
+### Bug Fixes Applied This Session (2026-04-25)
+| Bug | Fix |
+|-----|-----|
+| Dead space picked as operator | Find largest contiguous island first; valley threshold computed from island mean only |
+| "+" creates two sub-valleys; first one picked, splitting mid-operator | `merge_gap=30` merges nearby valleys into one operator region |
+| "1" trailing space (37px) merged into operator with merge_gap=40 | Reduced to merge_gap=30 (< 37px, so trailing space stays separate) |
+| `bitwise_not` flipping threshold output — Tesseract got white-on-black | Removed NOT; `THRESH_BINARY(225)` already gives black char on white bg |
+
+### Key Code State
+- `EXPR_REGION = (910, 960, 1120, 1310)` — y1,y2,x1,x2 (confirmed correct from images)
+- `EXPR_SCALE = 5` — 5x INTER_CUBIC upscale
+- `merge_gap = 30` in `_split_expression()`
+- `_ocr_digit_gray()` — uses `THRESH_BINARY(225)` directly (no NOT), tries PSM 10, 8, 13
+- `test_ocr.py` — diagnostic script, synced to use `bot._split_expression()` directly
 
 ### Calibrated Coordinates (3840×2160)
 | Element | Coords |
@@ -27,7 +41,6 @@
 | Numpad 1 | (1389, 895) |
 | Numpad 2 | (1497, 895) |
 | Numpad 3 | (1606, 895) |
-| Numpad X (clear) | (1713, 895) |
 | Numpad 4 | (1389, 1006) |
 | Numpad 5 | (1497, 1006) |
 | Numpad 6 | (1606, 1006) |
@@ -38,16 +51,16 @@
 | Numpad ✓ | (1713, 1117) |
 
 ### Open Issues (rox-bot)
-- **OCR test**: Trigger CAPTCHA popup → run OCR → verify it reads the math question
-- **Live run**: Let bot trigger CAPTCHA naturally and watch auto-solve execute
-- **Maturity timer**: Still disabled — pytesseract import now available, can re-enable anytime
+- **Final OCR test**: Run `test_ocr.py` with CAPTCHA popup → confirm `Result: 'X+Y'` or `'X-Y'`
+- **Live run**: Let bot trigger CAPTCHA naturally, watch auto-solve execute
+- **Maturity timer**: Still disabled
 - **Node movement**: Gold label color range not calibrated
 
-### Project Portfolio (as of 2026-04-24)
+### Project Portfolio (as of 2026-04-25)
 | Pos | Project | Status |
 |-----|---------|--------|
 | 1 | drtakaful | Phase 3 next (6 tool/form pages) |
-| 2 | rox-bot | Auto-solve wired — OCR test pending |
+| 2 | rox-bot | OCR fixes applied — final test next session |
 | 3 | cms-takaful | Built — awaiting deploy |
 
 ## Session Recap (For AI Restart)
@@ -55,11 +68,10 @@
 - **Aspiration**: Work from home in Kelantan — Takaful + freelancing
 - **AI Companion**: Timothy — installed April 7, 2026
 - **rox-bot**: `K:\indie-projects\rox-bot\rox_gardening.py`
-  - CAPTCHA auto-solve: enabled, coordinates calibrated for 4K screen
+  - CAPTCHA auto-solve: all fixes applied, needs final test
   - Tesseract path: `C:\Program Files\Tesseract-OCR\tesseract.exe`
-  - OCR reads from (1097, 735) ±200w ±35h, BINARY_INV, PSM 8
-  - Confirm button: (1101, 1005) — blue button in dialog
-- **Next session priorities**: OCR test → live run → tune if needed
+  - `test_ocr.py` in same folder — run with popup visible to verify
+- **Next session priorities**: Run `test_ocr.py` → confirm OCR reads expression → live bot run
 
 ## Session Memory Limit
 - **Maximum**: 500 lines
@@ -67,4 +79,4 @@
 - **Format Reference**: See `main/session-format.md` for rebuild structure
 
 ---
-*Session updated: 2026-04-24 at 18:45*
+*Session updated: 2026-04-25 at 00:14*
