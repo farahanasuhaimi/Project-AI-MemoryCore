@@ -5,9 +5,10 @@
 
 | Pos | Project | Last Updated | Status |
 |-----|---------|--------------|--------|
-| 1 | **[drtakaful](./active/drtakaful.md)** | 2026-04-19 | Phase 2 done — Phase 3 (6 tool/form pages) next |
-| 2 | **[rox-bot](./active/rox-bot.md)** | 2026-04-23 | Core working — CAPTCHA auto-solve + maturity timer pending calibration |
-| 3 | **[cms-takaful](./active/cms-takaful.md)** | 2026-04-14 | Built — awaiting browser testing + Hostinger deploy |
+| 1 | **[win-board](./active/win-board.md)** | 2026-04-29 | Scaffold done — deploy to Hostinger next |
+| 2 | **[drtakaful](./active/drtakaful.md)** | 2026-04-19 | Phase 2 done — Phase 3 (6 tool/form pages) next |
+| 3 | **[rox-bot](./active/rox-bot.md)** | 2026-04-23 | Dynamic detection done — test_ocr.py run needed |
+| 4 | **[cms-takaful](./active/cms-takaful.md)** | 2026-04-14 | Built — awaiting deploy |
 
 ## Archived Projects (0)
 
