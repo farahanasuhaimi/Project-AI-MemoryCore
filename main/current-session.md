@@ -1,63 +1,62 @@
-# Current Session Memory - 2026-04-29
+# Current Session Memory - 2026-04-30
 *Active working memory for current conversation*
 
 ## Session Context
-**Session Type**: Work — win-board new project setup
-**Current Project**: win-board — `D:\Kerja\Codes\win-board`
-**Status**: Scaffold complete, Google OAuth working, pushed to GitHub with precompiled assets
+**Session Type**: Work — win-board environment setup on new PC
+**Current Project**: win-board — `D:\WebDev\win-board`
+**Status**: Fully cloned and configured. Google OAuth SSL issue unresolved — to continue tomorrow.
 
 ## Active Project
 - **Name**: win-board (Daily Win Board)
-- **Started**: 2026-04-29
-- **Context**: Laravel 12 daily task board — commitment-first, dopamine-driven
+- **Location on this PC**: `D:\WebDev\win-board`
+- **GitHub**: `https://github.com/farahanasuhaimi/win-board`
 
 ## Working Memory
 
-### win-board — Current State (end of 2026-04-29 session)
+### win-board — Current State (end of 2026-04-30 session)
 
-**Stack**: Laravel 12.58 + Tailwind v4 (`@tailwindcss/vite`) + MySQL + Google OAuth (Socialite)
+**Stack**: Laravel 12.58 + Tailwind v4 + MySQL + Google OAuth (Socialite)
 
-**What's built**:
-- Full scaffold: models, migrations, controllers, routes, views
-- Gumroad UI (Syne/DM Sans/JetBrains Mono, thick borders, hard shadows, Gumroad palette)
-- Google OAuth login — working locally
-- Dashboard: daily commitment lock, 4-tier task board (Must/Should/Good/Parking Lot), streak + wins bar, celebration toasts, reset modal
-- All task mutations AJAX — no page reloads
-- SSL cert fix for Windows: Guzzle configured with `cacert.pem` in `AppServiceProvider`
+**This PC environment**:
+- OS username: `User`
+- MySQL: root / `1234qwer`
+- DB: `daily_win_board` — created, all 7 migrations ran
+- PHP ini: `C:\Program Files\php\php.ini`
+- curl.cainfo in php.ini → `C:\Program Files\php\extras\ssl\cacert.pem` (valid, exists)
+- APP_URL: `http://localhost:8000`
 
-**Database**: `daily_win_board` (MySQL) — all 7 migrations run
+**What's done on this PC**:
+- Cloned from GitHub ✓
+- `composer install` ✓
+- `.env` configured (DB, Google OAuth, APP_URL) ✓
+- `server.php` created in project root (Laravel 12.58 gap) ✓
+- Database + migrations ✓
+- `AppServiceProvider` cleaned up (old Socialite SSL override removed) ✓
+- `config/services.php` clean (no guzzle key) ✓
 
-**GitHub**: `https://github.com/farahanasuhaimi/win-board` — 3 commits pushed
-- Precompiled Vite assets in `public/build/` (for Hostinger — no Node needed)
+**Blocking issue**:
+- Google OAuth SSL: `cURL error 60` — PHP's system curl.cainfo should handle it now
+- Needs test: restart server → try Google login → see if it lands on dashboard
 
-**Not yet done**:
-- Full end-to-end dashboard test
-- Hostinger deployment
-- Google OAuth production callback URL
-
-### Hostinger Deploy — Next Steps
-- SSH into Hostinger → git clone or git pull
-- Set document root to `/public`
-- Copy `.env.example` → `.env`, fill production values (DB, Google OAuth with production callback URL)
-- `composer install --no-dev --optimize-autoloader`
-- `php artisan key:generate && php artisan migrate --force && php artisan config:cache && php artisan route:cache`
-- Update Google Cloud Console: add production callback URI
+**Next session priority**:
+1. `php artisan serve` → test Google login fresh
+2. If works: full dashboard end-to-end test
+3. Then: Hostinger deployment
 
 ### Project Portfolio
 | Pos | Project | Status |
 |-----|---------|--------|
-| 1 | win-board | Scaffold done — deploy to Hostinger next |
+| 1 | win-board | On new PC — SSL fix pending test |
 | 2 | drtakaful | Phase 3 next (6 tool/form pages) |
 | 3 | rox-bot | Dynamic detection done — test_ocr.py run needed |
 | 4 | cms-takaful | Built — awaiting deploy |
 
 ## Session Recap (For AI Restart)
 - **User**: Nufa (Farahana Suhaimi) — Takaful Consultant + Data Engineer, PhD (CNN)
-- **win-board**: `D:\Kerja\Codes\win-board` — Laravel 12 daily task board
-  - Google OAuth working (SSL fix via AppServiceProvider + cacert.pem at `C:\Users\IGS\cacert.pem`)
-  - Precompiled assets pushed to GitHub for Hostinger
-  - Next: deploy to Hostinger, test dashboard end-to-end
-- **rox-bot**: `K:\indie-projects\rox-bot\rox_gardening.py` — still needs test_ocr.py run
+- **This PC**: `D:\WebDev\` — different machine from yesterday's `D:\Kerja\Codes\`
+- **win-board**: cloned, DB ready, but Google OAuth SSL not yet confirmed working
+- **Key fix applied**: removed old AppServiceProvider Socialite SSL override — letting PHP's native curl.cainfo handle SSL instead
+- **Tomorrow**: restart server and test login flow end-to-end
 
 ## Session Memory Limit
 - **Maximum**: 500 lines
@@ -65,4 +64,4 @@
 - **Format Reference**: See `main/session-format.md` for rebuild structure
 
 ---
-*Session updated: 2026-04-29*
+*Session updated: 2026-04-30*
