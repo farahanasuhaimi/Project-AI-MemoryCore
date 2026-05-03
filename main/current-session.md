@@ -1,10 +1,10 @@
-# Current Session Memory - 2026-05-02
+# Current Session Memory - 2026-05-03
 *Active working memory for current conversation*
 
 ## Session Context
-**Session Type**: Work — win-board OAuth fixes + full Phase 2 build
+**Session Type**: Work — win-board Phase 2 polish + mobile fixes + UX improvements
 **Current Project**: win-board — `D:\WebDev\win-board`
-**Status**: Phase 2 pushed to GitHub. Hostinger needs pull + migrate.
+**Status**: All changes pushed to GitHub. Hostinger deploy in progress (needs pull + migrate).
 
 ## Active Project
 - **Name**: win-board (Daily Win Board)
@@ -14,44 +14,43 @@
 
 ## Working Memory
 
-### win-board — Current State (end of 2026-05-02 session)
+### win-board — Current State (end of 2026-05-03 session)
 
-**Stack**: Laravel 12.58 + Tailwind v4 + MySQL + Google OAuth (Socialite)
+**Stack**: Laravel 12 + Tailwind v4 + MySQL + Google OAuth (Socialite)
 
 **What was done this session**:
-- Google OAuth working on production ✓ (3 bugs fixed: stateless, SSL CA bundle, redirect_uri)
-- Move tasks between sections (with restrictions) ✓
-- Carry-forward undone must/should with LATE/URGENT badges ✓
-- OG meta tags + Canva OG image (option 3) pushed ✓
-- Phase 2 complete and pushed:
-  - `/history` — win history with done_at times
-  - `/review` — 7-day bar chart + section completion rates
-  - `/admin` — user management, stats, make/revoke admin
-  - `is_admin` migration applied locally
+- Hostinger Phase 2 deploy complete ✓ (git pull + migrate + set is_admin)
+- Navbar responsive — two-row mobile layout (brand + logout top, links below)
+- Task buttons (move/delete) always visible on mobile, hover-only on desktop
+- Parking Lot carry-forward fixed — park tasks persist day-to-day
+- "→ Tomorrow" button removed from Parking Lot (redundant)
+- Commitment linked to Must task — picker in form, live ✅ done when task ticked
+- Must task delete guard — dimmed × button, modal with "Park it / Delete / Cancel"
+- `must → park` move allowed in TaskController
+- Review chart fixed — bars grow upward, wins by done_at, Mon-Sun week
+- History redesigned — weekly summary cards (past completed weeks only)
+- Nav reordered: Board → Review → History
+- README + CLAUDE.md + project list updated
 
-**Pending on Hostinger** (next session priority):
+**Pending on Hostinger**:
 1. `git pull origin main`
-2. `php artisan migrate` (adds is_admin to users)
-3. `php artisan config:clear && php artisan cache:clear`
-4. `UPDATE users SET is_admin = 1 WHERE email = 'farahanams@gmail.com';`
-5. Verify OG image reachable at `https://life.drtakaful.com/images/og.png`
-6. Full end-to-end test of all Phase 2 pages
+2. `php artisan migrate` (adds task_id to daily_commits)
+3. `php artisan config:clear && php artisan route:cache`
 
 ### Project Portfolio
 | Pos | Project | Status |
 |-----|---------|--------|
-| 1 | win-board | Phase 2 pushed — Hostinger deploy pending |
+| 1 | win-board | Phase 2 + polish complete — Hostinger sync pending |
 | 2 | drtakaful | Phase 3 next (6 tool/form pages) |
 | 3 | rox-bot | Dynamic detection done — test_ocr.py run needed |
 | 4 | cms-takaful | Built — awaiting deploy |
 
 ## Session Recap (For AI Restart)
 - **User**: Nufa (Farahana Suhaimi) — Takaful Consultant + Data Engineer, PhD (CNN)
-- **This PC**: `D:\WebDev\` — new PC
-- **win-board**: Phase 1 + Phase 2 both complete and on GitHub
-- **Phase 2** = Win History + Weekly Review + Admin Dashboard (all built this session)
+- **This PC**: `D:\WebDev\` — main dev machine with GPU
+- **win-board**: Phase 1 + Phase 2 + Polish all complete and on GitHub
 - **Phase 3** = Goal Cascade (future planning session)
-- **Next**: Nufa deploys Phase 2 on Hostinger, then run SQL to set herself as admin
+- **Next**: Sync Hostinger (pull + migrate), then either Phase 3 planning or move to drtakaful
 
 ## Session Memory Limit
 - **Maximum**: 500 lines
@@ -59,4 +58,4 @@
 - **Format Reference**: See `main/session-format.md` for rebuild structure
 
 ---
-*Session updated: 2026-05-02*
+*Session updated: 2026-05-03*
