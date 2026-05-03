@@ -2,55 +2,84 @@
 *Active working memory for current conversation*
 
 ## Session Context
-**Session Type**: Work — win-board Phase 2 polish + mobile fixes + UX improvements
-**Current Project**: win-board — `D:\WebDev\win-board`
-**Status**: All changes pushed to GitHub. Hostinger deploy in progress (needs pull + migrate).
+**Session Type**: Work — drtakaful.com SEO + AI-SEO campaign
+**Current Project**: drtakaful — `D:\WebDev\Takaful`
+**Status**: win-board fully synced (GitHub + Hostinger) ✓. FAQPage schema campaign in progress on drtakaful.
 
 ## Active Project
-- **Name**: win-board (Daily Win Board)
-- **Location on this PC**: `D:\WebDev\win-board`
-- **GitHub**: `https://github.com/farahanasuhaimi/win-board`
-- **Live URL**: `https://life.drtakaful.com`
+- **Name**: drtakaful.com
+- **Location on this PC**: `D:\WebDev\Takaful`
+- **GitHub**: `https://github.com/farahanasuhaimi/drtakaful`
+- **Live URL**: `https://drtakaful.com`
+- **Audit Doc**: `docs/seo-article-audit.md`
 
 ## Working Memory
 
-### win-board — Current State (end of 2026-05-03 session)
+### drtakaful — FAQPage Schema Campaign Progress
 
-**Stack**: Laravel 12 + Tailwind v4 + MySQL + Google OAuth (Socialite)
+**Goal**: Add FAQPage schema to all articles for AI-SEO (Google AI Overviews, Perplexity, ChatGPT Search)
 
-**What was done this session**:
-- Hostinger Phase 2 deploy complete ✓ (git pull + migrate + set is_admin)
-- Navbar responsive — two-row mobile layout (brand + logout top, links below)
-- Task buttons (move/delete) always visible on mobile, hover-only on desktop
-- Parking Lot carry-forward fixed — park tasks persist day-to-day
-- "→ Tomorrow" button removed from Parking Lot (redundant)
-- Commitment linked to Must task — picker in form, live ✅ done when task ticked
-- Must task delete guard — dimmed × button, modal with "Park it / Delete / Cancel"
-- `must → park` move allowed in TaskController
-- Review chart fixed — bars grow upward, wins by done_at, Mon-Sun week
-- History redesigned — weekly summary cards (past completed weeks only)
-- Nav reordered: Board → Review → History
-- README + CLAUDE.md + project list updated
+**Pattern used** — insert as 3rd object in `@graph` array before closing `]`:
+```json
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://drtakaful.com/[filename]#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "...",
+          "acceptedAnswer": { "@type": "Answer", "text": "..." }
+        }
+      ]
+    }
+```
 
-**Pending on Hostinger**:
-1. `git pull origin main`
-2. `php artisan migrate` (adds task_id to daily_commits)
-3. `php artisan config:clear && php artisan route:cache`
+**Completed (9 articles)**:
+- [x] `simpanan-vs-takaful.html` — duplicate resolved, FAQPage added, CDN fixed, dark-card heading fix
+- [x] `panduan-lengkap-medical-card-takaful.html` — year refresh + FAQPage
+- [x] `panduan-lengkap-medical-card-2026.html`
+- [x] `medical-card-atau-ci-dulu.html`
+- [x] `perkeso-vs-takaful-medical-card.html`
+- [x] `panduan-lengkap-penyakit-kritikal-takaful.html`
+- [x] `harta-beku-dan-hibah-takaful.html`
+- [x] `tempoh-menunggu-medical-card.html`
+- [x] `socso-vs-takaful-penyakit-kritikal.html`
+- [x] `beza-medical-card-vs-pelan-penyakit-kritikal.html`
+
+**Next in queue** (from audit priority list):
+- [ ] `kenapa-takaful-penting.html`
+- [ ] `takaful-vs-insurans.html`
+- [ ] `panduan-lengkap-hibah-takaful.html`
+- [ ] `formula-10-peratus-pendapatan-takaful.html`
+- [ ] `kenapa-perlu-rancang-kewangan-awal.html`
+- [ ] ... (continue down `docs/seo-article-audit.md`)
+
+**Other pending**:
+- Fix weak titles: hibah (English), formula-10 (branded), kenapa-rancang (generic)
+- Add schema to 7 no-schema tool/form pages
+- simpananvstakaful.html → remove after 30 days from redirect (after ~2026-06-01)
+- Update `docs/seo-article-audit.md` as items completed
+
+### Key Technical Notes
+- **CDN Tailwind**: `https://cdn.tailwindcss.com` — ALWAYS keep. `src/tailwind-config.js` is theme-only, not a replacement.
+- **Heading visibility**: `prose-headings:text-gray-900` cascades into dark cards — always add explicit `text-white` on headings inside `bg-gray-900`/dark containers.
+- **Canonical URL pattern**: `https://drtakaful.com/` lowercase per sitemap.xml (existing schemas use mixed-case `DrTakaful.com` — leave as-is unless doing full file rewrite)
 
 ### Project Portfolio
 | Pos | Project | Status |
 |-----|---------|--------|
-| 1 | win-board | Phase 2 + polish complete — Hostinger sync pending |
-| 2 | drtakaful | Phase 3 next (6 tool/form pages) |
-| 3 | rox-bot | Dynamic detection done — test_ocr.py run needed |
+| 1 | win-board | Phase 2 + polish complete — fully synced (GitHub + Hostinger) ✓ |
+| 2 | drtakaful | FAQPage schema campaign in progress (9/~30 done) |
+| 3 | rox-bot | Dynamic CAPTCHA detection done — test_ocr.py run needed |
 | 4 | cms-takaful | Built — awaiting deploy |
 
 ## Session Recap (For AI Restart)
 - **User**: Nufa (Farahana Suhaimi) — Takaful Consultant + Data Engineer, PhD (CNN)
 - **This PC**: `D:\WebDev\` — main dev machine with GPU
-- **win-board**: Phase 1 + Phase 2 + Polish all complete and on GitHub
-- **Phase 3** = Goal Cascade (future planning session)
-- **Next**: Sync Hostinger (pull + migrate), then either Phase 3 planning or move to drtakaful
+- **win-board**: Fully synced — no further work needed
+- **drtakaful**: FAQPage schema campaign started. 9 articles done. Resume from `kenapa-takaful-penting.html`
+- **Working style**: "do it one by one" — each article committed and pushed before moving to next. "go" = proceed.
 
 ## Session Memory Limit
 - **Maximum**: 500 lines
@@ -58,4 +87,4 @@
 - **Format Reference**: See `main/session-format.md` for rebuild structure
 
 ---
-*Session updated: 2026-05-03*
+*Session updated: 2026-05-03 — 20:09*
