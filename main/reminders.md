@@ -3,9 +3,8 @@
 
 ## Open
 
-- **win-board: Deploy to Hostinger**: `git pull` → `php artisan migrate` (3 pending: estimated_minutes, google tokens) → `php artisan config:cache && php artisan route:cache`
-- **win-board: Google Calendar token**: Enable Google Calendar API in Cloud Console → re-login on live site to grant `calendar.readonly` scope + capture refresh token
+<!-- none -->
 
 ## Completed
-<!-- Resolved reminders move here. Format: -->
-<!-- - **Title** (completed YYYY-MM-DD): What was done and the outcome -->
+- **win-board: Deploy to Hostinger** (completed 2026-05-07): Migrations applied, config + route cache cleared. All 3 pending migrations landed successfully.
+- **win-board: Google Calendar token** (completed 2026-05-07): API enabled, OAuth authorized, token saved. Fixed service to fetch from all calendars — strip now showing correctly on dashboard.

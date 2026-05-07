@@ -4,3 +4,6 @@
 
 # Claude Code settings
 .claude/settings.local.json
+
+# Local secrets — never push
+tools/secrets.py
