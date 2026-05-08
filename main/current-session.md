@@ -2,42 +2,45 @@
 *Active working memory for current conversation*
 
 ## Session Context
-**Session Type**: Work — Project-B memory refactor + content file saving + RudyG planning
-**Last Active Project**: Project-B (`D:\Kerja\Codes\Project-B`)
-**Status**: Phase 3b complete. Phase 3c (RudyG/HuggingFace) scoped, not started.
+**Session Type**: Work — Project-B Phase 3c (RudyG local model)
+**Last Active Project**: Project-B (`K:\Project-B` on home PC)
+**Status**: Phase 3c complete and working.
 
 ## Last Session Recap
 
-### Project-B — What Was Done (2026-05-08)
+### Project-B — What Was Done (2026-05-08 evening)
 
-1. **Memory architecture refactor** — Rudy now owns all note-saving. Each agent has its own notes file (`{agent}_notes.json`). Rudy emits `SAVE_FINANCE/MARKETING/HR/RUDY_NOTE` tags at routing time; agents read-only.
+1. **Phase 3c complete** — RudyG local model path built and tested.
+   - `config/local_client.py` — OpenAI SDK → Ollama at `localhost:11434/v1`
+   - `config/settings.py` — `LOCAL_MODEL = "gemma4:latest"`, `LOCAL_BASE_URL`
+   - `orchestrator/router.py` — `route_rudyg()`, `_decide_agent_local()`, `_call_agent_local()`
+   - `orchestrator/main.py` — regex detects `RudyG[,\s]` prefix
+   - No evaluator loop on local path (DeepSeek not available on this machine)
 
-2. **`rudy_notes.json`** — Standing instructions for Rudy himself (cross-domain preferences, coordination rules). Loaded into routing prompt as "Standing Instructions" every call.
+2. **Project cloned to home PC** — `K:\Project-B` (was `D:\Kerja\Codes\Project-B` on work PC)
 
-3. **`SAVE_CONTENT_FILE` tag** — Marketing agent now writes full content to `library/content/<filename>.md`. Confirmed working: `content_week1_thread.md` created during testing.
-
-4. **Phase 3b confirmed working** — Notes saving, content files, conversation history all functioning end-to-end.
-
-5. **RudyG plan** — HuggingFace Inference API (OpenAI-compatible), triggered by "RudyG" prefix. Model TBD. Documented as Phase 3c in `project-b.md`.
+3. **Ollama setup** — v0.20.5, `gemma4:latest` (9.6GB). Swap to `qwen3:14b` after pull.
 
 ### Project Portfolio
 | Pos | Project | Status |
 |-----|---------|--------|
 | 1 | win-board | Stable — deployed, Calendar working, onboarding live |
-| 2 | Project-B | Phase 3b done — Phase 3c (RudyG/HF) next |
+| 2 | Project-B | Phase 3c done — Phase 4 (Web GUI) next |
 | 3 | drtakaful | FAQPage schema campaign in progress (9/~30 done) |
 | 4 | rox-bot | Dynamic CAPTCHA detection done — test_ocr.py run needed |
 | 5 | cms-takaful | Built — awaiting deploy |
 
 ## Next Session Resume Points
-- **Project-B Phase 3c**: Choose HF model → build `config/local_client.py` → detect "RudyG" in `main.py` → wire alternate call path in `router.py`
+- **Project-B Phase 4**: Web GUI (FastAPI + HTML)
+- **Project-B**: Pull `qwen3:14b` via Ollama → change `LOCAL_MODEL` in `config/settings.py`
 - **drtakaful**: Resume FAQPage schema from `kenapa-takaful-penting.html`
 - **rox-bot**: Run `test_ocr.py`
 
 ## Notes
-- Project root: `D:\Kerja\Codes\Project-B`
+- Home PC project root: `K:\Project-B`
 - Project-B entry point: `python -m orchestrator.main`
-- HF token needed for RudyG — add to `config/secrets.py` when ready
+- RudyG trigger: prefix with `RudyG` (comma/space both work)
+- DeepSeek key not on this machine — Rudy path will fail, only RudyG works here
 
 ## Session Memory Limit
 - **Maximum**: 500 lines
@@ -45,4 +48,4 @@
 - **Format Reference**: See `main/session-format.md` for rebuild structure
 
 ---
-*Session updated: 2026-05-08 16:00*
+*Session updated: 2026-05-08 22:55*

@@ -19,7 +19,7 @@ Next: RudyG (HuggingFace local model) integration, then Phase 4 (Web GUI).
 | Phase 2 | Core code (config, tools, agents, orchestrator, CLI) | ✅ Done |
 | Phase 3a | Product knowledge base (7 products) + brand voice guide | ✅ Done |
 | Phase 3b | End-to-end agent testing + memory system | ✅ Done |
-| Phase 3c | RudyG — HuggingFace local model integration | ⏳ Next |
+| Phase 3c | RudyG — Ollama local model integration (gemma4, swap to qwen3:14b later) | ✅ Done |
 | Phase 4 | Web GUI (FastAPI + HTML) | Planned |
 | Phase 5 | PaaS blueprint | Planned |
 
@@ -87,12 +87,13 @@ orchestrator/memory/rudy_notes.json        ← Rudy's own standing instructions
 - Rudy owns context extraction — agents receive notes, never write them
 - `SAVE_CONTENT_FILE` tag writes full markdown content to `library/content/`
 
-## Phase 3c Plan — RudyG (HuggingFace)
-- Trigger: user addresses "RudyG" instead of "Rudy"
-- Model: TBD (user to choose from HF — Llama 3.1, Mistral, Phi-3, etc.)
-- Client: OpenAI SDK pointing to `https://api-inference.huggingface.co/v1/`
-- Auth: `HF_TOKEN` in `config/secrets.py`
-- Files to create: `config/local_client.py`, update `config/settings.py`, update `orchestrator/main.py` + `router.py`
+## Phase 3c — RudyG (Ollama local) ✅
+- Trigger: prefix message with `RudyG` (handles `RudyG `, `RudyG,`, `RudyG:` etc.)
+- Model: `gemma4:latest` via Ollama at `localhost:11434/v1` — swap to `qwen3:14b` when pulled
+- Client: OpenAI SDK in `config/local_client.py`
+- Settings: `LOCAL_MODEL`, `LOCAL_BASE_URL` in `config/settings.py`
+- No evaluator loop on local path (DeepSeek not available on this machine)
+- Project cloned to `K:\Project-B` on home PC
 
 ---
 **Last Updated**: 2026-05-08 | **Position**: Active
