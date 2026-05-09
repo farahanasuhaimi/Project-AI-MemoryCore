@@ -1,51 +1,65 @@
-# Current Session Memory - 2026-05-08
+# Current Session Memory - 2026-05-09
 *Active working memory for current conversation*
 
 ## Session Context
-**Session Type**: Work — Project-B Phase 3c (RudyG local model)
+**Session Type**: Work — Project-B Phase 5 (Dashboard + Coordinator)
 **Last Active Project**: Project-B (`K:\Project-B` on home PC)
-**Status**: Phase 3c complete and working.
+**Status**: Phase 5c complete. Dashboard live with coordinator voice. Claude light-mode theme applied.
 
 ## Last Session Recap
 
-### Project-B — What Was Done (2026-05-08 evening)
+### Project-B — What Was Done (2026-05-09 afternoon)
 
-1. **Phase 3c complete** — RudyG local model path built and tested.
-   - `config/local_client.py` — OpenAI SDK → Ollama at `localhost:11434/v1`
-   - `config/settings.py` — `LOCAL_MODEL = "gemma4:latest"`, `LOCAL_BASE_URL`
-   - `orchestrator/router.py` — `route_rudyg()`, `_decide_agent_local()`, `_call_agent_local()`
-   - `orchestrator/main.py` — regex detects `RudyG[,\s]` prefix
-   - No evaluator loop on local path (DeepSeek not available on this machine)
+1. **Ollama fixed** — gemma4:latest confirmed working at ~98 tok/s on RTX 5080. `OLLAMA_KEEP_ALIVE=30m` set as User env var.
 
-2. **Project cloned to home PC** — `K:\Project-B` (was `D:\Kerja\Codes\Project-B` on work PC)
+2. **Bug fix** — `router.py` `_decide_agent_local` empty-string crash fixed.
 
-3. **Ollama setup** — v0.20.5, `gemma4:latest` (9.6GB). Swap to `qwen3:14b` after pull.
+3. **Phase 5 — Dashboard (5a, 5b, 5c complete)**
+
+   **New files:**
+   - `orchestrator/dashboard.py` — `generate_dashboard()` → `{focus, urgent, pulse}` via native Ollama API
+   - `orchestrator/action_handler.py` — `process_action()` → parse + save + coordinator voice
+   - `web/templates/dashboard.html` — full dashboard UI (replaces chat)
+
+   **Modified:**
+   - `web/app.py` — added `/dashboard`, `/action` endpoints
+
+   **Key architecture:**
+   - Native Ollama API (`POST /api/generate` with `format:"json"`) — OpenAI-compat drops content on structured prompts
+   - gemma4 wraps JSON under `"fields"` key — flattened in parser
+   - 8 action types: commission, expense, extra_income, content_create, content_posted, followup, setup, query
+   - Coordinator voice: Rudy speaks first (1-3 sentences), `✓ Saved · summary` is quiet footer
+   - Commission math always recomputed from rate (never trusts LLM math)
+   - Commission rates stored in `finance_notes.json` as `{topic:"commission_rate", product:"...", rate:0.30}`
+
+   **UI:**
+   - Claude light mode: `#f5f4ef` bg, white cards, Claude orange `#d97757` accent
+   - Focus Today / Urgent / Business Pulse / Action Panel / Cards feed
+   - Pulse bar: red (< 40%) → orange (< 80%) → bright orange (≥ 80%)
 
 ### Project Portfolio
 | Pos | Project | Status |
 |-----|---------|--------|
-| 1 | win-board | Stable — deployed, Calendar working, onboarding live |
-| 2 | Project-B | Phase 3c done — Phase 4 (Web GUI) next |
-| 3 | drtakaful | FAQPage schema campaign in progress (9/~30 done) |
-| 4 | rox-bot | Dynamic CAPTCHA detection done — test_ocr.py run needed |
+| 1 | Project-B | Phase 5c done — dashboard live |
+| 2 | win-board | Stable — deployed |
+| 3 | drtakaful | FAQPage schema in progress |
+| 4 | rox-bot | test_ocr.py needed |
 | 5 | cms-takaful | Built — awaiting deploy |
 
 ## Next Session Resume Points
-- **Project-B Phase 4**: Web GUI (FastAPI + HTML)
-- **Project-B**: Pull `qwen3:14b` via Ollama → change `LOCAL_MODEL` in `config/settings.py`
+- **Run**: `cd K:\Project-B && uvicorn web.app:app --reload --port 8000`
+- **Test live**: close a policy, ask financial health, make content, record expense
+- **Onboard Rudy**: type "A-Life Idaman commission is 30%" etc. to seed finance_notes
+- **Phase 5d** (next): onboarding nudge if no finance_notes set
 - **drtakaful**: Resume FAQPage schema from `kenapa-takaful-penting.html`
 - **rox-bot**: Run `test_ocr.py`
+- **Deferred**: markdown/Excel export feature
 
 ## Notes
-- Home PC project root: `K:\Project-B`
-- Project-B entry point: `python -m orchestrator.main`
-- RudyG trigger: prefix with `RudyG` (comma/space both work)
-- DeepSeek key not on this machine — Rudy path will fail, only RudyG works here
-
-## Session Memory Limit
-- **Maximum**: 500 lines
-- **Reset Behavior**: RAM-style reset preserving only Session Recap
-- **Format Reference**: See `main/session-format.md` for rebuild structure
+- Run: `cd K:\Project-B && uvicorn web.app:app --reload --port 8000`
+- Old chat UI still at `/chat-ui`
+- Native Ollama API: `POST http://localhost:11434/api/generate` with `format:"json"`
+- `OLLAMA_KEEP_ALIVE=30m` active — gemma4 stays 30 min idle
 
 ---
-*Session updated: 2026-05-08 22:55*
+*Session updated: 2026-05-09 13:29*

@@ -1,15 +1,15 @@
 # Project-B — Rudy AI Business Agent System
 
 ## Project Info
-- **Local path**: `D:\Kerja\Codes\Project-B`
+- **Local path**: `K:\Project-B` (home PC) / `D:\Kerja\Codes\Project-B` (work PC)
 - **GitHub**: `https://github.com/farahanasuhaimi/Project-B` (private)
 - **Stack**: Python 3.12, DeepSeek API (Anthropic-compatible), JSON file memory
 - **Interface**: CLI → Web GUI (Phase 4)
 - **Entry point**: `python -m orchestrator.main`
 
 ## Current Status
-**Phase 3b in progress — system tested and working. Memory + content file saving confirmed.**
-Next: RudyG (HuggingFace local model) integration, then Phase 4 (Web GUI).
+**Phase 4 in progress — Web GUI built (FastAPI + HTML). Ollama models path issue being resolved (OLLAMA_MODELS set to K:\.ollama\models).**
+Next: Confirm Ollama sees models after PC restart, then test web UI end-to-end.
 
 ## Phase Tracker
 
@@ -20,7 +20,7 @@ Next: RudyG (HuggingFace local model) integration, then Phase 4 (Web GUI).
 | Phase 3a | Product knowledge base (7 products) + brand voice guide | ✅ Done |
 | Phase 3b | End-to-end agent testing + memory system | ✅ Done |
 | Phase 3c | RudyG — Ollama local model integration (gemma4, swap to qwen3:14b later) | ✅ Done |
-| Phase 4 | Web GUI (FastAPI + HTML) | Planned |
+| Phase 4 | Web GUI (FastAPI + HTML) | 🔨 In Progress |
 | Phase 5 | PaaS blueprint | Planned |
 
 ## What's Built
@@ -89,11 +89,26 @@ orchestrator/memory/rudy_notes.json        ← Rudy's own standing instructions
 
 ## Phase 3c — RudyG (Ollama local) ✅
 - Trigger: prefix message with `RudyG` (handles `RudyG `, `RudyG,`, `RudyG:` etc.)
-- Model: `gemma4:latest` via Ollama at `localhost:11434/v1` — swap to `qwen3:14b` when pulled
+- Default route is now fully local — all requests go through Ollama, no prefix needed
+- Model: `gemma4:latest` → swap to `qwen3:14b` when pulled (change `LOCAL_MODEL` in `config/settings.py`)
 - Client: OpenAI SDK in `config/local_client.py`
 - Settings: `LOCAL_MODEL`, `LOCAL_BASE_URL` in `config/settings.py`
 - No evaluator loop on local path (DeepSeek not available on this machine)
 - Project cloned to `K:\Project-B` on home PC
 
+## Phase 4 — Web GUI 🔨
+- `web/app.py` — FastAPI app, 4 endpoints: `GET /`, `GET /models`, `POST /chat`, `POST /clear`
+- `web/templates/index.html` — Chat UI (Tailwind CDN, dark theme, model dropdown with ⟳ refresh)
+- `orchestrator/router.py` — `route_rudyg()` now accepts `model` param — model swappable at runtime
+- Model dropdown auto-populates from Ollama (`/api/tags`); ⟳ button refreshes list manually
+- History kept server-side (in-memory, single user); Clear button resets both UI and server
+- Run: `uvicorn web.app:app --reload --port 8000` from `K:\Project-B`
+
+## Ollama Setup (Home PC)
+- Ollama v0.23.2 installed
+- Models stored at `K:\.ollama\models\` (non-default path)
+- `OLLAMA_MODELS=K:\.ollama\models` set as User env var — requires Ollama restart to take effect
+- After restart: `ollama list` should show downloaded models
+
 ---
-**Last Updated**: 2026-05-08 | **Position**: Active
+**Last Updated**: 2026-05-09 | **Position**: Active
