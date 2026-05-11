@@ -1,42 +1,40 @@
-# Current Session Memory - 2026-05-10
+# Current Session Memory - 2026-05-11
 *Active working memory for current conversation*
 
 ## Session Context
-**Session Type**: Work — cms-takaful polish
-**Last Active Project**: cms-takaful (`K:\cms-takaful`, live at `list.drtakaful.com`)
-**Status**: All changes deployed to Hostinger.
+**Session Type**: Discovery — bookkeeping (RezTax) rediscovered + documented
+**Last Active Project**: bookkeeping (`D:\Kerja\Codes\bookkeeping`, local only)
+**Status**: Project audited, markdown created, added to project list. Ready to work on next session.
 
 ## Last Session Recap
 
-### cms-takaful — What Was Done (2026-05-10)
+### bookkeeping — What Was Done (2026-05-11 afternoon)
 
-1. **Policy Number field added**
-   - Migration: `add_policy_number_to_policies_table` — nullable string after `client_id`
-   - `Policy::$fillable`, `storePolicy()` validation + save updated
-   - Add Policy form shows input; policy list row shows `#<number>` in monospace
+1. **RezTax rediscovered** — forgotten project, last commit 2026-04-07 (34 days idle)
+2. **Project audited** via controllers, routes, migrations, git log
+3. **`projects/active/bookkeeping.md` created** — full snapshot documented
+4. **`projects/project-list.md` updated** — bookkeeping added as #7 (🔴 stale)
+5. Session cut short before actual work began
 
-2. **Inline Edit Policy form**
-   - Route: `PUT clients/{client}/policies/{policy}` → `ClientController::updatePolicy()`
-   - Alpine toggle per row (`editing` bool) — pre-filled form with all fields
-   - No page reload — stays on client detail view
-
-3. **Dashboard rework**
-   - Renewals: 30 days → 7 days, max 5, red badge ≤3 days
-   - **Overdue Follow-ups** panel added (next_action_date in the past, max 5)
-   - Layout: stats → urgent (renewals + overdue) → leads + clients → commission → log + angles
-   - Urgent row hidden when nothing to act on
+### What RezTax Has Built
+- Income/expense CRUD, dashboard with monthly + yearly charts, category breakdown
+- Tax summary page + PDF export (LHDN: EPF, insurance, lifestyle, medical reliefs + Zakat rebate)
+- Savings goals tracking, CSV import, admin panel, Lemon Squeezy pricing stub
+- Stack: Laravel 12, Tailwind v4, MySQL, dompdf, Lemon Squeezy
 
 ### Project Portfolio
 | Pos | Project | Status |
 |-----|---------|--------|
-| 1 | win-board | Phase 3 done — gamification live |
+| 1 | win-board | Phase 3 stable — streak + XP fixes deployed |
 | 2 | Project-B | Phase 5c done — dashboard live |
-| 3 | takaful-content-planner | Phase 1 done — blocked on Google OAuth setup |
-| 4 | cms-takaful | Fully deployed — polish done |
+| 3 | cms-takaful | Fully deployed — polish done |
+| 4 | takaful-content-planner | Phase 1 done — blocked on Google OAuth setup |
 | 5 | drtakaful | FAQPage schema in progress |
 | 6 | rox-bot | test_ocr.py needed |
+| 7 | bookkeeping (RezTax) | 🔴 Rediscovered — audit pending, next: run + assess |
 
 ## Next Session Resume Points
+- **bookkeeping**: Run `php artisan serve`, walk through the UI, decide what's missing before deploy
 - **win-board Phase 4**: Goal Cascade (10yr → 5yr → yearly → quarterly → daily)
 - **takaful-content-planner Phase 2**: Content CRUD — needs Google OAuth creds first
 - **Project-B Phase 5d**: Onboarding nudge if no finance_notes set
@@ -45,9 +43,19 @@
 
 ## Notes
 - cms-takaful local: `cd K:\cms-takaful && php artisan serve`
-- win-board local: `cd D:\WebDev\win-board && php artisan serve`
+- win-board local: `cd D:\Kerja\Codes\win-board && php artisan serve`
 - Project-B local: `cd K:\Project-B && uvicorn web.app:app --reload --port 8000`
-- Hostinger SSH: `python K:\Project-AI-MemoryCore\tools\hostinger_ssh.py "command"`
+- Hostinger SSH: `python D:\Kerja\Codes\Project-AI-MemoryCore\tools\hostinger_ssh.py "command"`
+- Hostinger auto-deploys from GitHub — no need to `git pull` manually on server
+- win-board local path is `D:\Kerja\Codes\win-board` (not `D:\WebDev\win-board`)
+
+## Notes
+- cms-takaful local: `cd K:\cms-takaful && php artisan serve`
+- win-board local: `cd D:\Kerja\Codes\win-board && php artisan serve`
+- bookkeeping local: `cd D:\Kerja\Codes\bookkeeping && php artisan serve`
+- Project-B local: `cd K:\Project-B && uvicorn web.app:app --reload --port 8000`
+- Hostinger SSH: `python D:\Kerja\Codes\Project-AI-MemoryCore\tools\hostinger_ssh.py "command"`
+- Hostinger auto-deploys from GitHub — no need to `git pull` manually on server
 
 ---
-*Session updated: 2026-05-10*
+*Session updated: 2026-05-11*
