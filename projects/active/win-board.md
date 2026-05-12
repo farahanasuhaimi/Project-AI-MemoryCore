@@ -8,7 +8,7 @@
 - **Hosting**: Hostinger
 
 ## Current Status
-**Phase 3 (Gamification) — Complete**
+**Phase 3 (Gamification) — Complete + Bug Fixes (2026-05-11)**
 Phase 4 (Goal Cascade) is next — no start date set yet.
 
 ## What's Built
@@ -31,11 +31,15 @@ Phase 4 (Goal Cascade) is next — no start date set yet.
 
 ### Phase 3 — Gamification (complete, 2026-05-10)
 - **HUD strip** — compact bar: streak, wins, shields, level, XP bar in one row
-- **XP system** — Must +30, Should +20, Good +10; 10-level curve (Starter → GOAT)
+- **XP system** — Must +15, Should +10, Good +5, Park +5; 10-level curve (Starter → GOAT)
 - **Streak shields** — earn 1 shield every 7 days (max 3); auto-consumed on exactly 1 missed day
 - **Comeback mechanic** — 2× XP for 3 days after streak break
 - **Daily quests** — 3 randomised per day, hidden behind HUD toggle (📋 N/3 ▾); +10 XP each, +20 bonus for all 3
 - Quest pool: Clear all Musts / Should Champion / Nice Touch / Early Bird / High Five
+
+### Bug Fixes (2026-05-11)
+- **Timezone fix** — `config/app.php` now reads `APP_TIMEZONE` from `.env` (Asia/Kuala_Lumpur); `now()` was running on UTC causing streak resets for entries made before 8 AM MYT
+- **XP rebalanced** — reduced from Must 30 / Should 20 / Good 10 / Park 0 to Must 15 / Should 10 / Good 5 / Park 5 (daily quests compensate)
 
 ## Database
 ```
