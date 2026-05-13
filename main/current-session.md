@@ -20,13 +20,9 @@
 
 5. **Builder updated** — `create.blade.php` + `edit.blade.php`: Room & Board field added, `loadFromCatalog` auto-fills it, attribute grid reordered.
 
-### ⚠️ Deploy Pending — Run These Before Testing
-```
-cd K:\cms-takaful
-php artisan migrate --force
-php artisan db:seed --class=PlanProductSeeder --force
-```
-Both need `--force` (production mode). Seeder is idempotent (uses firstOrCreate).
+### ✅ Deployed — 2026-05-13
+- Migration `add_room_board_to_quotation_plans` applied
+- PlanProductSeeder ran — 9 Alife products seeded to Hana's catalog
 
 ### cms-takaful — Full Feature State
 | Phase | Feature | Status |
@@ -41,13 +37,17 @@ Both need `--force` (production mode). Seeder is idempotent (uses firstOrCreate)
 | New | Strategy Library (full) | ✅ |
 | New | Reach Angles (idea board) | ✅ |
 | New | Quotation module | ✅ |
-| New | Plan Catalog — Alife products seeded | ⏳ pending deploy |
-| New | Quotation Room & Board field | ⏳ pending deploy |
+| New | Plan Catalog — 9 Alife products, fully enriched | ✅ 2026-05-13 |
+| New | Quotation Room & Board field | ✅ 2026-05-13 |
+| New | Quotation Prospect section (name, phone, notes) | ✅ 2026-05-13 |
+| New | Quotation print — watermark, disclaimer, header, total row | ✅ 2026-05-13 |
+| New | loadFromCatalog — trim verbose values, Plan as free text | ✅ 2026-05-13 |
+| New | Favicon — matcha shield SVG | ✅ 2026-05-13 |
 
 ### Project Portfolio
 | Pos | Project | Status |
 |-----|---------|--------|
-| 1 | cms-takaful | ✅ Full feature set. Deploy pending for catalog + Room & Board |
+| 1 | cms-takaful | ✅ Full feature set + quotation polish. Next: shareable link, lead linking |
 | 2 | win-board | Phase 3 stable — Phase 4 (Goal Cascade) next |
 | 3 | Project-B | Phase 5c done — dashboard live |
 | 4 | takaful-content-planner | Phase 1 done — blocked on Google OAuth |
@@ -56,8 +56,8 @@ Both need `--force` (production mode). Seeder is idempotent (uses firstOrCreate)
 | 7 | bookkeeping (RezTax) | 🔴 Audit pending |
 
 ## Next Session Resume Points
-- **cms-takaful**: Run the 2 deploy commands above, then test plan catalog auto-fill in quotation builder
-- **cms-takaful Quotation next features**: shareable client link, lead linking, status tracking
+- **cms-takaful**: Test quotation builder — load from catalog, print preview (watermark + prospect block)
+- **cms-takaful Quotation next**: shareable client link, lead linking, status tracking
 - **win-board Phase 4**: Goal Cascade (10yr → 5yr → yearly → quarterly → daily)
 - **bookkeeping**: Run `php artisan serve`, walk through UI, decide what's missing
 - **takaful-content-planner Phase 2**: needs Google OAuth creds first
@@ -65,13 +65,13 @@ Both need `--force` (production mode). Seeder is idempotent (uses firstOrCreate)
 - **rox-bot**: Run `test_ocr.py`
 
 ## Notes
-- cms-takaful local: `cd K:\cms-takaful && php artisan serve`
-- cms-takaful deploy: `SSH_BASE="domains/drtakaful.com/public_html/list" python tools/hostinger_ssh.py "git pull && php artisan migrate --force"`
+- **On laptop** — all K:\ paths become D:\Kerja\Codes\
+- cms-takaful local: `cd D:\Kerja\Codes\cms-takaful && php artisan serve`
+- cms-takaful deploy: **Hostinger auto-deploys on git push** — no `git pull` needed. SSH only for migrations/seeders: `SSH_BASE="domains/drtakaful.com/public_html/list" python tools/hostinger_ssh.py "php artisan migrate --force"`
 - Git push needs: `git -c http.sslVerify=false push` (SSL cert issue on this machine)
 - win-board local: `cd D:\Kerja\Codes\win-board && php artisan serve`
 - bookkeeping local: `cd D:\Kerja\Codes\bookkeeping && php artisan serve`
-- Project-B local: `cd K:\Project-B && uvicorn web.app:app --reload --port 8000`
-- Hostinger SSH tool: `python K:\Project-AI-MemoryCore\tools\hostinger_ssh.py "command"`
+- Hostinger SSH tool: `python D:\Kerja\Codes\Project-AI-MemoryCore\tools\hostinger_ssh.py "command"`
 
 ---
-*Session updated: 2026-05-13 — 10:47 AM*
+*Session updated: 2026-05-13 — end of session (on laptop)*
