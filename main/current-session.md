@@ -56,6 +56,7 @@
 | 7 | bookkeeping (RezTax) | 🔴 Audit pending |
 
 ## Next Session Resume Points
+- **[Home PC]**: Confirm project paths — not at K:\ root
 - **cms-takaful**: Test quotation builder — load from catalog, print preview (watermark + prospect block)
 - **cms-takaful Quotation next**: shareable client link, lead linking, status tracking
 - **win-board Phase 4**: Goal Cascade (10yr → 5yr → yearly → quarterly → daily)
@@ -65,13 +66,11 @@
 - **rox-bot**: Run `test_ocr.py`
 
 ## Notes
-- **On laptop** — all K:\ paths become D:\Kerja\Codes\
-- cms-takaful local: `cd D:\Kerja\Codes\cms-takaful && php artisan serve`
+- **Home PC** — projects NOT at K:\ root (paths to confirm next session)
+- **Laptop** — all K:\ paths become D:\Kerja\Codes\
 - cms-takaful deploy: **Hostinger auto-deploys on git push** — no `git pull` needed. SSH only for migrations/seeders: `SSH_BASE="domains/drtakaful.com/public_html/list" python tools/hostinger_ssh.py "php artisan migrate --force"`
 - Git push needs: `git -c http.sslVerify=false push` (SSL cert issue on this machine)
-- win-board local: `cd D:\Kerja\Codes\win-board && php artisan serve`
-- bookkeeping local: `cd D:\Kerja\Codes\bookkeeping && php artisan serve`
 - Hostinger SSH tool: `python D:\Kerja\Codes\Project-AI-MemoryCore\tools\hostinger_ssh.py "command"`
 
 ---
-*Session updated: 2026-05-13 — end of session (on laptop)*
+*Session updated: 2026-05-13 — end of evening rest session (home PC)*
