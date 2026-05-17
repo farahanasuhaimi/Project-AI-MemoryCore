@@ -1,75 +1,70 @@
-# Current Session Memory - 2026-05-15
+# Current Session Memory - 2026-05-17
 *Active working memory for current conversation*
 
 ## Session Context
-**Session Type**: Feature build — cms-takaful reach angle → strategy pre-fill (office laptop)
-**Last Active Project**: cms-takaful (`D:\Kerja\Codes\cms-takaful`, live at `list.drtakaful.com`)
-**Status**: Feature built + pushed. Seeder pending home PC SSH run.
+**Session Type**: Infrastructure + rox-bot Hermes agent exploration (home PC)
+**Last Active Project**: rox-bot (`K:\indie-projects\rox-bot`)
+**Status**: Agent loop running. Input bar coordinate needs verification.
 
-## Last Session Recap
+## What Was Done
 
-### cms-takaful — What Was Done (2026-05-15 Afternoon, Office)
+### cms-takaful — Seeder (Done)
+- Ran `ReachAngleSeeder` on Hostinger via SSH — 10 angles seeded for `admin@drtakaful.com` ✅
 
-1. **Reach Angle → Strategy pre-fill** — `+ Strategy` button added to each angle card. Clicking it goes to `strategies/create?angle_id=X`. Controller reads angle, passes to view. Form pre-fills `title` + `description`. `target_segment` shown as hint under Audience dropdown. No auto-link on create.
+### rox-bot — Hermes Agent Architecture Built
+New file: `K:\indie-projects\rox-bot\rox_agent.py`
 
-2. **ReachAngleSeeder** — 10 Timothy-curated reach angles for Malaysian takaful. Uses `firstOrCreate` so safe to re-run. Pushed as `f5e0eef`.
+**Stack:**
+- Gemma4 (Ollama) → vision: classify game state + locate input bar
+- Hermes3 (Ollama, pulled today) → agent brain: tool calling for non-captcha decisions
+- ADB (`C:\LDPlayer\LDPlayer9\adb.exe`, device `emulator-5556`) → all taps + screenshots
 
-3. **SSH timed out from office** — seeder not yet run on Hostinger. Pending home PC.
+**CAPTCHA flow (correct sequence):**
+1. Gemma4 detects state=captcha + input bar coordinates
+2. OCR reads expression from region above input bar
+3. Click input bar → numpad slides up
+4. Fresh screenshot → detect numpad grid (validated 3×4)
+5. Click digits → click Confirm
 
-### ⚠️ First thing next home PC session
-Run seeder on Hostinger:
-```
-$env:SSH_BASE="domains/drtakaful.com/public_html/list"; python "K:\Project-AI-MemoryCore\tools\hostinger_ssh.py" "php artisan db:seed --class=ReachAngleSeeder --force"
-```
+**What works:**
+- ADB connected, screenshot + tap working
+- Agent loop ticking
+- Numpad grid validation (rejects false positives from game UI)
+- Hermes bypassed for CAPTCHA (deterministic)
+- Debug image auto-saved as `debug_captcha.png` when captcha detected
 
-### cms-takaful — Full Feature State
-| Phase | Feature | Status |
-|---|---|---|
-| Core | Multi-tenancy (global scopes) | ✅ |
-| Core | PII encryption | ✅ |
-| Core | Invite-only auth | ✅ |
-| Core | Admin panel | ✅ |
-| 1 | Credits system | ✅ |
-| 2 | Policy Marketplace | ✅ |
-| 3 | Strategy Marketplace | ✅ |
-| New | Strategy Library (full) | ✅ |
-| New | Reach Angles (idea board) | ✅ |
-| New | Quotation module | ✅ |
-| New | Plan Catalog — 9 Alife products, fully enriched | ✅ |
-| New | Quotation Room & Board field | ✅ |
-| New | Quotation Prospect section | ✅ |
-| New | Quotation print — watermark, disclaimer, header, total row | ✅ |
-| New | loadFromCatalog — trim verbose values, Plan as free text | ✅ |
-| New | Favicon — matcha shield SVG | ✅ |
-| New | attribute_options — soft dropdown per catalog field | ✅ fully live |
-| New | Reach Angle → Strategy pre-fill | ✅ deployed |
-| New | 10 Timothy reach angles seeder | ⏳ pushed, pending SSH run |
+**What's pending:**
+- Gemma4's input bar coordinates slightly off — need to check `debug_captcha.png` with CAPTCHA visible
+- Once input bar click lands correctly, full loop should complete
 
-### Project Portfolio
+**Changes made to rox_gardening.py:**
+- Multi-scale `find_gardening_button()` (scales 0.3–1.5)
+- `detect_numpad_buttons()` with bottom-half constraint + grid validation
+- `find_captcha_input_bar()` and `find_captcha_confirm_button()` (color detection)
+- Absolute paths for all templates (`_HERE = os.path.dirname(__file__)`)
+- `ocr_expression()` accepts optional `numpad_positions` for region derivation
+
+## ⚠️ First Thing Next Session (rox-bot)
+1. Trigger a CAPTCHA in RoX
+2. Run `python rox_agent.py` and wait for `[DEBUG] Saved debug_captcha.png`
+3. Open `debug_captcha.png` — verify red circle lands on the dark input bar
+4. If off, adjust Gemma4 prompt or apply coordinate offset
+
+## Project Portfolio
 | Pos | Project | Status |
 |-----|---------|--------|
-| 1 | cms-takaful | Angle→Strategy done. Next: shareable link, lead linking |
-| 2 | win-board | Phase 3 stable — Phase 4 (Goal Cascade) next |
-| 3 | Project-B | Phase 5c done — dashboard live |
-| 4 | takaful-content-planner | Phase 1 done — blocked on Google OAuth |
-| 5 | drtakaful | FAQPage schema in progress |
-| 6 | rox-bot | test_ocr.py needed |
+| 1 | cms-takaful | Seeder done. Next: shareable client link, lead linking |
+| 2 | rox-bot | Agent loop built. Input bar coordinate pending verification |
+| 3 | win-board | Phase 4 (Goal Cascade) next |
+| 4 | Project-B | Phase 5c done — dashboard live |
+| 5 | takaful-content-planner | Blocked on Google OAuth |
+| 6 | drtakaful | FAQPage schema in progress |
 | 7 | bookkeeping (RezTax) | 🔴 Audit pending |
 
-## Next Session Resume Points
-- **Home PC first**: Run ReachAngleSeeder on Hostinger via SSH
-- **cms-takaful next features**: shareable client link, lead linking, status tracking
-- **win-board Phase 4**: Goal Cascade (10yr → 5yr → yearly → quarterly → daily)
-- **bookkeeping**: Run `php artisan serve`, walk through UI, decide what's missing
-- **takaful-content-planner Phase 2**: needs Google OAuth creds first
-- **drtakaful**: Resume FAQPage schema from `kenapa-takaful-penting.html`
-- **rox-bot**: Run `test_ocr.py`
-
 ## Notes
-- cms-takaful at `K:\cms-takaful` (home PC) / `D:\Kerja\Codes\cms-takaful` (office)
-- cms-takaful deploy: **Hostinger auto-deploys on git push** — no `git pull` needed
-- SSH for cms-takaful: `SSH_BASE="domains/drtakaful.com/public_html/list"`
-- Office laptop git push: `git -c http.sslVerify=false push`
+- Hermes3 now installed on Ollama (4.7GB, `hermes3:latest`)
+- LDPlayer ADB: `C:\LDPlayer\LDPlayer9\adb.exe`, device `emulator-5556`, resolution 1600×900
+- rox-bot at `K:\indie-projects\rox-bot` — not a git repo
 
 ---
-*Session updated: 2026-05-15 — office laptop, reach angle → strategy pre-fill built*
+*Session: 2026-05-17 — home PC, cms-takaful seeder + rox-bot Hermes agent*
