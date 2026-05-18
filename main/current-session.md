@@ -2,18 +2,30 @@
 *Active working memory for current conversation*
 
 ## Session Context
-**Session Type**: drtakaful SEO schema wrap-up (office laptop)
-**Last Active Project**: drtakaful (`D:\Kerja\Codes\drtakaful`)
-**Status**: FAQPage schema complete across all content pages. Pushed to GitHub.
+**Session Type**: cms-takaful focus points feature (office laptop)
+**Last Active Project**: cms-takaful (`D:\Kerja\Codes\cms-takaful`)
+**Status**: FocusPoint model + pivot + seeder built and pushed. Migrations pending home PC run.
 
 ## What Was Done
 
-### drtakaful — FAQPage Schema Complete ✅
-- Added FAQPage JSON-LD to `statistik-takaful-malaysia.html` — 6 questions: Takaful penetration rates, medical inflation (12–15%/yr), KWSP savings crisis, Wang Tak Dituntut (RM13.7B), Harta Beku (RM70B+), top causes of death in Malaysia
-- Added FAQPage JSON-LD to `sepuluhpercentincome.html` — 6 questions: 10% = 100 bulan formula, coverage by income, allocation breakdown, common mistakes
-- Fixed `sepuluhpercentincome.html`: missing Tailwind CDN script + canonical tag
-- FAQPage schema now **100% complete** across all ~35 content pages
-- Committed and pushed to GitHub
+### cms-takaful — Focus Points Feature ✅
+- Built `focus_points` table — `title`, `description`, `group`, `status`
+- Built `strategy_focus_point` pivot — many-to-many, strategies ↔ focus points
+- `FocusPoint` model with `strategies()` relation
+- `Strategy` model updated with `focusPoints()` relation
+- `FocusPointSeeder` — 22 pre-populated points across 6 groups: `financial`, `protection`, `family`, `life_stage`, `emotional`, `islamic`
+- Committed and pushed (`1280c4f`)
+
+**⚠️ On next home PC session:** Run migrations + seed
+```bash
+php artisan migrate
+php artisan db:seed --class=FocusPointSeeder
+```
+
+### Conceptual model now clear:
+```
+ReachAngle (WHO) → Strategy (HOW: channel + category) → FocusPoints (WHAT to talk about)
+```
 
 ## ⚠️ Carry-over: rox-bot (from 2026-05-17 home PC session)
 Input bar coordinate verification still pending:
@@ -23,6 +35,10 @@ Input bar coordinate verification still pending:
 4. If off, adjust Gemma4 prompt or apply coordinate offset
 
 ## Next Up
+
+### cms-takaful — Wire focus points into strategy UI
+- Attach focus points picker when creating/editing a strategy
+- Show linked focus points on strategy show/index views
 
 ### drtakaful — Phase 3 Retheme (6 tool/form pages)
 - `kalkulator-hibah.html`
@@ -35,7 +51,7 @@ Input bar coordinate verification still pending:
 ## Project Portfolio
 | Pos | Project | Status |
 |-----|---------|--------|
-| 1 | cms-takaful | Seeder done. Next: shareable client link, lead linking |
+| 1 | cms-takaful | Focus points built. Next: wire into strategy UI |
 | 2 | rox-bot | Agent loop built. Input bar coordinate pending verification |
 | 3 | win-board | Phase 4 (Goal Cascade) next |
 | 4 | Project-B | Phase 5c done — dashboard live |
@@ -50,4 +66,4 @@ Input bar coordinate verification still pending:
 - rox-bot at `K:\indie-projects\rox-bot` — not a git repo
 
 ---
-*Session: 2026-05-18 — office laptop, drtakaful FAQPage schema complete*
+*Session: 2026-05-18 — office laptop, cms-takaful focus points feature built + pushed*
