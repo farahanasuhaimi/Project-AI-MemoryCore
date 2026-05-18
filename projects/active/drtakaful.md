@@ -10,7 +10,7 @@
 - **Duration**: 0 min
 
 ## Current Status
-- **Last Session**: 2026-04-19 — Phase 2 complete (index.html fully rethemed)
+- **Last Session**: 2026-05-18 — FAQPage schema complete across all content pages
 - **Next Steps**: Phase 3 — retheme 6 tool/form pages
 - **Known Issues**:
   - No auto-deploy — requires manual FTP/cPanel upload to web host
@@ -35,6 +35,10 @@
 
 ## Session History (Last 5)
 
+### 2026-05-18 — FAQPage Schema Complete (office laptop)
+- **Changes**: Added FAQPage JSON-LD schema to `statistik-takaful-malaysia.html` and `sepuluhpercentincome.html`. Fixed missing Tailwind CDN + canonical on `sepuluhpercentincome.html`. FAQPage schema now complete across all ~35 content pages. Pushed to GitHub.
+- **Time Spent**: ~30 min
+
 ### 2026-04-19 — Phase 2 Complete
 - **Changes**: All sections of index.html rethemed with brand tokens — zero generic grays remain. Sections: consultation form, featured case study, blog (30+ articles + badges), FAQ, tools grid, final CTA, footer, exit popup. Repo cleaned (5 Python scripts removed). README updated with brand token table + phase tracker. Mobile UX fix: removed redundant navbar WA pill.
 - **Time Spent**: ~0 min
@@ -48,10 +52,10 @@
 
 ## Technical Notes
 - **Repository**: github.com/farahanasuhaimi/drtakaful (version control only — no auto-deploy)
-- **Local path**: `D:\WebDev\Takaful`
+- **Local path**: `D:\Kerja\Codes\drtakaful` (office) / `D:\WebDev\Takaful` (home)
 - **Deploy**: Manual upload to web host (FTP/cPanel) — files: `index.html`, `src/global.css`, `src/tailwind-config.js`
 - **No build step** — Tailwind via CDN with custom config
 - **Brand tokens**: Defined in `src/tailwind-config.js` — use tokens everywhere, no raw hex
 
 ---
-**Last Updated**: 2026-04-23 | **Position**: #1/10 Active
+**Last Updated**: 2026-05-18 | **Position**: #6/10 Active
