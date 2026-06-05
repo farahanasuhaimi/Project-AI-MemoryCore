@@ -1,48 +1,46 @@
-# Current Session Memory - 2026-05-19
+# Current Session Memory - 2026-06-05
 *Active working memory for current conversation*
 
 ## Session Context
-**Session Type**: cms-takaful Hostinger deploy (home PC)
-**Last Active Project**: cms-takaful (`K:\cms-takaful`, live at `list.drtakaful.com`)
-**Status**: Focus Points feature fully deployed to production. ✅
+**Session Type**: cms-takaful — system review + feature dev (office laptop)
+**Last Active Project**: cms-takaful (`D:\Kerja\Codes\cms-takaful`, live at `list.drtakaful.com`)
+**Status**: 4 commits shipped. Migration pending deploy to Hostinger.
 
 ## What Was Done
 
-### cms-takaful — Focus Points deployed to Hostinger ✅
-- `focus_points` table migration applied on Hostinger
-- `strategy_focus_point` pivot migration applied on Hostinger
-- `FocusPointSeeder` run — 22 focus points live across 6 groups
-- Caches cleared (`optimize:clear`)
+### 1. Focus Points UI wired into strategy CRUD ✅
+- `StrategyController`: grouped focus points to create/edit/show; pivot synced on store/update/storeGenerated
+- create/edit: grouped checkboxes; show: badges
+- Commit: `7d2f704`
 
-**Deploy command used:**
+### 2. System review + README + TASKS.md ✅
+- Full review of all 13 modules
+- Key finding: `AngleContentService` (casual/story/factual) is orphaned — no route/controller. "Content Library" nav = `strategies.index`
+- README updated with strengths, weaknesses, content angle gaps
+- TASKS.md created with 4-priority backlog
+- Commits: `f06616f`, `ab7174c`
+
+### 3. Lead → Client conversion — proper implementation ✅
+- Migration: `lead_id` nullable FK on clients table **(not yet run on Hostinger)**
+- Client model: `lead_id` fillable + `lead()` relationship
+- `convert()`: accepts IC, migrates touchpoints, stores origin
+- Leads index: inline confirm panel with IC field
+- Client show: "Converted Lead" badge
+- Commit: `ef81082`
+
+## Deploy Command (home PC)
 ```
-SSH_BASE="domains/drtakaful.com/public_html/list" python tools/hostinger_ssh.py "git pull" "php artisan migrate --force" "php artisan db:seed --class=FocusPointSeeder --force" "php artisan optimize:clear"
+SSH_BASE="domains/drtakaful.com/public_html/list" python tools/hostinger_ssh.py "git pull" "php artisan migrate --force" "php artisan optimize:clear"
 ```
 
-## Next Up
-
-### cms-takaful — Wire focus points into strategy UI
-- Attach focus points picker when creating/editing a strategy
-- Show linked focus points on strategy show/index views
-
-### rox-bot — Input bar coordinate verification (carry-over)
-1. Trigger a CAPTCHA in RoX
-2. Run `python rox_agent.py` → wait for `[DEBUG] Saved debug_captcha.png`
-3. Open `debug_captcha.png` — verify red circle lands on the dark input bar
-4. If off, adjust Gemma4 prompt or apply coordinate offset
-
-### drtakaful — Phase 3 Retheme (6 tool/form pages)
-- `kalkulator-hibah.html`
-- `kalkulator-belanjawanku.html`
-- `analisis-keperluan.html`
-- `borang-permohonan.html`
-- `borang-fact-finding-medical-card.html`
-- `konsultasi-percuma.html`
+## Next Up (from TASKS.md Priority 1)
+- Link Quotation → Lead/Client (add FK)
+- Touchpoint strategy tagging
 
 ## Project Portfolio
 | Pos | Project | Status |
 |-----|---------|--------|
-| 1 | cms-takaful | Focus points live on Hostinger ✅. Next: wire into strategy UI |
+| 1 | cms-takaful | Focus points UI + Lead→Client done ✅. Migration pending Hostinger deploy |
 | 2 | rox-bot | Agent loop built. Input bar coordinate pending verification |
 | 3 | win-board | Phase 4 (Goal Cascade) next |
 | 4 | Project-B | Phase 5c done — dashboard live |
@@ -51,13 +49,10 @@ SSH_BASE="domains/drtakaful.com/public_html/list" python tools/hostinger_ssh.py 
 | 7 | bookkeeping (RezTax) | 🔴 Audit pending |
 
 ## Notes
-- cms-takaful on home PC at `K:\cms-takaful`
+- cms-takaful on office laptop at `D:\Kerja\Codes\cms-takaful`, home PC at `K:\cms-takaful`
 - drtakaful local paths: `D:\Kerja\Codes\drtakaful` (office) / `D:\WebDev\Takaful` (home)
-- Hermes3 installed on home PC Ollama (`hermes3:latest`, 4.7GB)
-- LDPlayer ADB: `C:\LDPlayer\LDPlayer9\adb.exe`, device `emulator-5556`, resolution 1600×900
-- rox-bot at `K:\indie-projects\rox-bot` — not a git repo
 - Hostinger SSH tool: `python K:\Project-AI-MemoryCore\tools\hostinger_ssh.py "command"`
 - Hostinger needs `SSH_BASE` env var set per project
 
 ---
-*Session: 2026-05-19 — home PC, cms-takaful focus points deployed to Hostinger*
+*Session: 2026-06-05 — office laptop, system review + Lead→Client conversion built*
