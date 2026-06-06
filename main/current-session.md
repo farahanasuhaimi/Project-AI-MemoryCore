@@ -1,63 +1,57 @@
-# Current Session Memory - 2026-06-05
+# Current Session Memory - 2026-06-06
 *Active working memory for current conversation*
 
 ## Session Context
-**Session Type**: cms-takaful — Priority 1 complete (home PC)
+**Session Type**: cms-takaful — Priority 2 + Priority 3 complete (home PC, sunny Saturday)
 **Last Active Project**: cms-takaful (`K:\cms-takaful`, live at `list.drtakaful.com`)
-**Status**: All 3 Priority 1 tasks done and deployed. README + TASKS.md updated.
+**Status**: Priority 2 (4 tasks) + Priority 3 (4 tasks) all done and deployed to Hostinger.
 
-## What Was Done (Home PC Session)
+## What Was Done (2026-06-06 Home PC Session)
 
-### 1. Hostinger deploy — Lead→Client migration ✅
-- Ran `add_lead_id_to_clients_table` on Hostinger (built in office session, pending deploy)
-- `git pull` + `migrate --force` + `optimize:clear`
+### Priority 2 — Content Angles Overhaul ✅
 
-### 2. Quotation → Lead/Client link ✅
-- Migration: `lead_id` + `client_id` nullable FKs on quotations (nullOnDelete)
-- `Quotation` model: relationships to Lead + Client; fillable updated
-- Lead + Client models: `quotations()` hasMany
-- QuotationController: `parseLinkedPerson()` helper; linked_person through Alpine JSON blob
-- Create/edit: "Link to Lead or Client" dropdown
-- Show: linked badge + link; Index: linked name in subtitle
-- Client show: Quotations card in right column
-- Commit: `db49e20`
+1. **Rebuilt AngleContentController** — wired orphaned `AngleContentService`; library, generate, pin endpoints
+2. **Built AngleUsageController** — store/destroy for usage trail (date + lead/client + notes)
+3. **Redesigned Angles index** — card grid (3-col) with counts footer; click → show page
+4. **New Angles show page** — notes block, linked leads/strategies/clients panels, AI content section, usage trail
+5. **Renamed nav link** — "Content Library" → "Strategy Library" (already points to strategies.index)
+6. **Added "What to say" notes field** — to `reach_angles` table (migration), create/edit forms, show page
+7. **Migration**: `add_notes_to_reach_angles_table` + `create_angle_usages_table`
+8. **Fixed latestContents subquery** — correlated self-alias (`angle_contents as ac2`) for eager loading compat
+9. **Commits**: `3e1a687`, `5f1914e`, `52cdd24`
 
-### 3. Touchpoint strategy tagging ✅
-- Migration: `strategy_id` nullable FK on touchpoints (nullOnDelete)
-- Touchpoint model: `strategy_id` fillable + `strategy()` relationship
-- Strategy model: `touchpoints()` hasMany
-- TouchpointController: `strategy_id` validated; strategy eager-loaded in index
-- ClientController + LeadController: `$strategies` passed to views
-- Client show: strategy dropdown in Log Touchpoint form + shown in history
-- Leads index: strategy dropdown in both Hot + Warm forms
-- Follow-up log: Strategy column with link
-- Commit: `d89f5dc`
+### Priority 3 — Daily Friction ✅
 
-### 4. README + TASKS.md updated ✅
-- TASKS.md: all 3 Priority 1 tasks marked done
-- README: Recent Updates section, weaknesses fixed, modules + schema updated
-- Commit: `0d0d4aa`
+1. **Policy renewal "mark as renewed"** (`ClientController@renewPolicy`)
+   - Advances `start_date` by 1 month (monthly) or 1 year (yearly)
+   - Dashboard button: "Renewed ✓" with confirm dialog
+2. **Renewal → auto-create touchpoint** (`ClientController@createRenewalTouchpoint`)
+   - Creates touchpoint: phone_call, topic "Policy renewal – {label}", next_action_date = renewal date
+   - Dashboard button: "+ Follow-up"
+3. **Focus Points → Lead tagging** (migration `create_lead_focus_point_table`)
+   - `Lead.focusPoints()` belongsToMany pivot
+   - `LeadController@attachFocusPoint` / `detachFocusPoint` (AJAX JSON)
+   - "Tags" button on each lead row; toggle chips via fetch; tagged pills shown below name
+4. **Quotation PDF export** — polished print CSS (A4 landscape, watermark, disclaimer, no-overflow table)
+5. **Commit**: `76dceb4`
+6. **Deployed**: migrate + optimize:clear on Hostinger ✅
 
-## Deploy Command (home PC)
-```
-SSH_BASE="domains/drtakaful.com/public_html/list" python K:\Project-AI-MemoryCore\tools\hostinger_ssh.py "git pull" "php artisan migrate --force" "php artisan optimize:clear"
-```
+## Key Technical Notes (this session)
+- Home PC SSL issue: `git -c http.sslVerify=false push/pull` required
+- Composer SSL blocks DomPDF install → use browser `window.print()` instead
+- `latestContents()` correlated subquery: must use self-alias (`ac2`) not outer table reference
+- Hostinger SSH deploy: `SSH_BASE="domains/drtakaful.com/public_html/list" python "K:\Project-AI-MemoryCore\tools\hostinger_ssh.py" "command"`
 
-## Next Up (Priority 2 — Content Angles Overhaul)
-- Decision: remove or rebuild angle content generation (`AngleContentService` is orphaned)
-- Rename "Content Library" nav link to "Strategy Library"
-- Add content output to Angles
-
-## Or Priority 3 — Daily Friction
-- Quotation PDF export
-- Renewal → auto-create touchpoint
-- Focus Points → Lead tagging
-- Policy renewal "mark as renewed"
+## Next Up (Priority 4 — Visibility & Output)
+- Strategy effectiveness tracking — "times used" + "conversions linked" on Strategy show page
+- Export clients/leads to CSV
+- Email/notification for overdue follow-ups
+- Content calendar view
 
 ## Project Portfolio
 | Pos | Project | Status |
 |-----|---------|--------|
-| 1 | cms-takaful | Priority 1 fully done ✅. All deployed to Hostinger. Next: Priority 2 or 3 |
+| 1 | cms-takaful | Priority 1 ✅ Priority 2 ✅ Priority 3 ✅. Deployed. Next: Priority 4 |
 | 2 | rox-bot | Agent loop built. Input bar coordinate pending verification |
 | 3 | win-board | Phase 4 (Goal Cascade) next |
 | 4 | Project-B | Phase 5c done — dashboard live |
@@ -65,11 +59,5 @@ SSH_BASE="domains/drtakaful.com/public_html/list" python K:\Project-AI-MemoryCor
 | 6 | drtakaful | FAQPage schema done ✅. Phase 3 retheme next |
 | 7 | bookkeeping (RezTax) | 🔴 Audit pending |
 
-## Notes
-- cms-takaful on home PC at `K:\cms-takaful`
-- Git SSL issue on home PC: use `git -c http.sslVerify=false pull/push`
-- Hostinger SSH tool: `python K:\Project-AI-MemoryCore\tools\hostinger_ssh.py "command"`
-- Hostinger needs `SSH_BASE` env var set per project
-
 ---
-*Session: 2026-06-05 — home PC, Priority 1 closed (3 features + docs)*
+*Session: 2026-06-06 — home PC, sunny Saturday. Priority 2 + 3 closed (8 features total).*
