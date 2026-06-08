@@ -111,4 +111,5 @@ orchestrator/memory/rudy_notes.json        ← Rudy's own standing instructions
 - After restart: `ollama list` should show downloaded models
 
 ---
-**Last Updated**: 2026-05-09 | **Position**: Active
+**Last Updated**: 2026-05-09 | **Status**: Archived (manual) — 2026-06-08
+**Resume when**: Phase 4 Web GUI completion + Ollama model verification

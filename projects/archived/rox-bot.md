@@ -3,7 +3,7 @@
 
 ## Project Overview
 - **Type**: Tool / Game Automation
-- **Period**: 2026-04-23 - Active
+- **Period**: 2026-04-23 - Archived
 - **Tech Stack**: Python + pyautogui + OpenCV + win32gui
 - **Completion**: 35%
 - **Duration**: 0 min
@@ -37,4 +37,5 @@
 - **Auto-solve logic**: preserved in comments inside `handle_captcha()` and `check_maturity_timer()`
 
 ---
-**Last Updated**: 2026-04-23 | **Position**: #1/10 Active
+**Last Updated**: 2026-04-23 | **Status**: Archived (manual) — 2026-06-08
+**Resume when**: When actively playing RoX again

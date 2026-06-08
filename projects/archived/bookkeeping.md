@@ -8,7 +8,7 @@
 - **Last commit**: 2026-04-07
 
 ## Current Status
-**Status unknown — rediscovered 2026-05-11 after ~34 days idle 🔴**
+**Archived before review session — unknown what's missing before deploy.**
 Last commit: `fix: port category slug fix to main branch` (2026-04-07).
 No known next phase — needs a review session to determine what's missing before deploy.
 
@@ -44,3 +44,7 @@ payment_methods     — user_id, name
 ## Key Notes
 - Project referenced as "RezTax" in Timothy's memory — folder name is `bookkeeping`
 - Lemon Squeezy vendor package present (`lemonsqueezy/laravel`) — payment gating may be partially wired
+
+---
+**Last Updated**: 2026-04-07 | **Status**: Archived (manual) — 2026-06-08
+**Resume when**: Ready for pre-deploy review + launch sprint
