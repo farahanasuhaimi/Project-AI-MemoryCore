@@ -2,75 +2,58 @@
 *Active working memory for current conversation*
 
 ## Session Context
-**Session Type**: amin-maju — Smoke test complete + UX polish + Primavera Tier 1 + push (office laptop)
-**Mood**: Fokus dan produktif
-**Last Active Project**: amin-maju (`D:\Kerja\Codes\amin-maju`)
+**Session Type**: amin-maju — Feature backlog complete (3 features) + smoke test pending (home PC)
+**Mood**: Produktif
+**Last Active Project**: amin-maju (`K:\amin-maju`)
 
 ---
 
-## What Was Done (2026-06-09 Full Session)
+## What Was Done (Session 2 — Home PC)
 
-### Smoke Test — 100% COMPLETE ✅
-All 7 areas passed: Auth, Projects, Tasks, Quotations, Finance, Reports, Role restrictions.
+### Feature Backlog — ALL 3 DONE ✅
 
-### UX Polish
-- All edit forms: consistent Batal (left) | Kemaskini (right), Padam right-aligned underneath
-- Fixed nested form bug in `info-contacts/edit`
-- All inline edit actions use `✎` pencil icon (mobile-friendly)
-- Added Padam button to `tasks/edit` for owners (was missing)
+**1. Contact Directory**
+- `contacts` table (name, phone, type, company, notes) — global
+- ContactController CRUD + index/create/edit views
+- Sidebar nav "Kenalan" (canManageFinance guard)
+- InfoContacts create/edit: optional "Pilih dari Direktori" picker → fills party_name + party_type via Alpine x-refs
+- Pattern: `window.__directoryContacts = @json(...)` in `<script>` tag to avoid HTML attribute encoding issues
 
-### Primavera Tier 1 Features (projects/show.blade.php)
-- **Phase progress bar** — thin bar below phase name, % from task completion. Desktop: "X/Y" count; mobile: bar only
-- **Overdue badge** — `⚠ N lewat` on phase header when tasks past due date. Desktop: full text; mobile: compact
-- **Schedule pill** — "N hari lagi" (green) or "Lewat N hari" (red) in project header based on `estimated_end_date`. Hidden on completed/cancelled projects
+**2. Auto-suggest ClientPayment when quotation accepted**
+- QuotationController::update() detects outgoing status change → "accepted"
+- Flashes `suggest_payment` → one-time green banner on quotation show page
+- "Cipta Bayaran →" link pre-fills expected_amount + description from quotation
+- ClientPaymentController::create() accepts optional `quotation_id` param
 
-### Timezone Fix
-- `amin-maju` and `cms-takaful` both changed from UTC → `Asia/Kuala_Lumpur`
-
-### Deployment Prep
-- Removed `/public/build` from amin-maju `.gitignore` (same pattern as cms-takaful)
-- `npm run build` run successfully
-- Both projects committed and pushed to GitHub
-
-### Docs Updated
-- amin-maju README: full feature list + deployment steps
-- TASK.md: smoke test log complete, feature backlog updated (contact directory added)
+**3. Configurable milestone labels per project**
+- `milestone_labels` JSON column on projects (nullable)
+- `Project::milestoneLabel($key)` + `allMilestoneLabels()` helpers with BM fallback defaults
+- Project edit form: 5 rename inputs with default placeholders
+- client-payment create/edit + project finance tab use project labels
 
 ---
 
-## Smoke Test Status
-| Test | Status |
-|------|--------|
-| Auth | ✅ |
-| Projects | ✅ |
-| Tasks | ✅ |
-| Quotations | ✅ |
-| Finance | ✅ |
-| Reports | ✅ |
-| Role restrictions | ✅ |
+## Current State
+- All 3 features committed + pushed to GitHub
+- Migrations run successfully
+- PHP syntax clean
+- **Smoke test NOT yet done** — Nufa will test separately
 
 ---
 
 ## Next Up
-1. Feature backlog — pick order with Nufa:
-   - Contact directory (standalone contacts DB + dropdown)
-   - Phase status inline toggle (AJAX, click badge)
-   - Auto-suggest ClientPayment when quotation → Diterima
-   - Configurable milestone labels
+1. **Smoke test** — 3 new features + regression check
 2. Hostinger subdomain setup for amin-maju
 3. cms-takaful Priority 4
 
 ## Project Portfolio
 | Pos | Project | Status |
 |-----|---------|--------|
-| 1 | amin-maju | Smoke test ✅ · Tier 1 features ✅ · Deployed to GitHub · Hostinger setup pending |
-| 2 | cms-takaful | Priority 1–3 ✅ Deployed. Timezone fixed. Next: Priority 4 |
+| 1 | amin-maju | Smoke test pending · All backlog features ✅ · Pushed to GitHub |
+| 2 | cms-takaful | Priority 1–3 ✅ Deployed. Next: Priority 4 |
 | 3 | win-board | Phase 3 stable — Next: Phase 4 Goal Cascade |
 | 4 | takaful-content-planner | Blocked on Google OAuth |
 | 5 | drtakaful | FAQPage schema ✅ — Next: Phase 3 retheme |
-| — | Project-B | ARCHIVED |
-| — | rox-bot | ARCHIVED |
-| — | bookkeeping (RezTax) | ARCHIVED |
 
 ---
-*Session: 2026-06-09 — office laptop. Full smoke test + UX polish + Primavera features + both projects pushed.*
+*Session: 2026-06-09 home PC — feature backlog complete. Smoke test deferred.*
