@@ -1,76 +1,76 @@
-# Current Session Memory - 2026-06-08
+# Current Session Memory - 2026-06-09
 *Active working memory for current conversation*
 
 ## Session Context
-**Session Type**: amin-maju — Full scaffold built + smoke-testing started (office laptop)
-**Mood**: Productive — wonderful weekend just before this
+**Session Type**: amin-maju — Smoke test complete + UX polish + Primavera Tier 1 + push (office laptop)
+**Mood**: Fokus dan produktif
 **Last Active Project**: amin-maju (`D:\Kerja\Codes\amin-maju`)
 
 ---
 
-## What Was Done (2026-06-08 Office Laptop Session)
+## What Was Done (2026-06-09 Full Session)
 
-### Projects Archived
-- Project-B, rox-bot, bookkeeping (RezTax) — moved to `projects/archived/`
+### Smoke Test — 100% COMPLETE ✅
+All 7 areas passed: Auth, Projects, Tasks, Quotations, Finance, Reports, Role restrictions.
 
-### amin-maju — New Project Built from Scratch
+### UX Polish
+- All edit forms: consistent Batal (left) | Kemaskini (right), Padam right-aligned underneath
+- Fixed nested form bug in `info-contacts/edit`
+- All inline edit actions use `✎` pencil icon (mobile-friendly)
+- Added Padam button to `tasks/edit` for owners (was missing)
 
-**Stack**: Laravel 12 · Tailwind v4 (CSS-first) · Alpine.js v3 · MySQL · Vite 7
+### Primavera Tier 1 Features (projects/show.blade.php)
+- **Phase progress bar** — thin bar below phase name, % from task completion. Desktop: "X/Y" count; mobile: bar only
+- **Overdue badge** — `⚠ N lewat` on phase header when tasks past due date. Desktop: full text; mobile: compact
+- **Schedule pill** — "N hari lagi" (green) or "Lewat N hari" (red) in project header based on `estimated_end_date`. Hidden on completed/cancelled projects
 
-**Full scaffold in one session:**
-- Auth (login/logout only, owner creates accounts)
-- Role-based access: owner / worker / bookkeeper via `EnsureRole` middleware
-- 9 Models: Project (softDeletes), ProjectPhase, Task, Quotation, QuotationItem, InfoContact, Expense, ClientPayment, WorkerWage
-- 9 Migrations (fixed ordering issue: quotation_items must come after quotations)
-- 11 Controllers with full CRUD
-- `ProjectPhaseSeeder` service — 9 default phases in BM, auto-seeded on project create
-- 30+ Blade views — all in BM, Tailwind v4 styling
-- Alpine.js: tab switching, dynamic quotation item rows, AJAX task checkbox toggle
-- PDF quotation via `window.print()` (no Composer dep)
-- P&L reports: per-project + overview
+### Timezone Fix
+- `amin-maju` and `cms-takaful` both changed from UTC → `Asia/Kuala_Lumpur`
 
-**Bugs Fixed This Session:**
-1. Nested form bug → archive-on-save (separated archive form from edit form)
-2. Migration order: `quotation_items` sorted before `quotations` alphabetically → fixed timestamp
-3. Layout `x-data` missing `@props` → `$title` not injected
-4. `layouts/` vs `components/layouts/` — Blade component lookup requires `components/layouts/`
-5. Dashboard hardcoded zeroes → DashboardController passes live DB data
-6. Task checkbox full page reload → AJAX fetch + Alpine reactive toggle
-7. `@json()` with comma-containing expression → Blade `explode(',')` breaks it → moved map to controller
-8. `@json($itemsData)` in HTML attribute → `"` breaks attribute → moved to `<script>` tag
-9. Archived projects invisible → ProjectController::index() now passes `$archivedProjects` (onlyTrashed)
-10. "Papan Pemuka" → "Dashboard"
+### Deployment Prep
+- Removed `/public/build` from amin-maju `.gitignore` (same pattern as cms-takaful)
+- `npm run build` run successfully
+- Both projects committed and pushed to GitHub
 
-**Smoke Test Status (at session end):**
-- Auth ✅
-- Projects (create, 9 phases, edit, archive/restore) ✅
-- Tasks (AJAX checkbox toggle) ✅ — in progress
-- Quotations (create, PDF) ✅ — edit fix applied, not yet re-tested
-- Finance, Reports, Role restrictions — NOT YET TESTED
+### Docs Updated
+- amin-maju README: full feature list + deployment steps
+- TASK.md: smoke test log complete, feature backlog updated (contact directory added)
 
-**Repo**: `https://github.com/farahanasuhaimi/amin-maju` (private)
-**Local**: `D:\Kerja\Codes\amin-maju`
-**DB**: `amin_maju` on local MySQL
+---
+
+## Smoke Test Status
+| Test | Status |
+|------|--------|
+| Auth | ✅ |
+| Projects | ✅ |
+| Tasks | ✅ |
+| Quotations | ✅ |
+| Finance | ✅ |
+| Reports | ✅ |
+| Role restrictions | ✅ |
 
 ---
 
 ## Next Up
-1. Resume smoke test after lunch: Finance tab, Reports, Role restrictions (403 check)
-2. Re-test quotation edit (script tag fix applied)
-3. Update seed credentials to real names before production
-4. Hostinger subdomain + auto-deploy setup
+1. Feature backlog — pick order with Nufa:
+   - Contact directory (standalone contacts DB + dropdown)
+   - Phase status inline toggle (AJAX, click badge)
+   - Auto-suggest ClientPayment when quotation → Diterima
+   - Configurable milestone labels
+2. Hostinger subdomain setup for amin-maju
+3. cms-takaful Priority 4
 
 ## Project Portfolio
 | Pos | Project | Status |
 |-----|---------|--------|
-| 1 | amin-maju | Scaffold complete — smoke-testing in progress |
-| 2 | cms-takaful | Priority 1–3 ✅ Deployed. Next: Priority 4 |
+| 1 | amin-maju | Smoke test ✅ · Tier 1 features ✅ · Deployed to GitHub · Hostinger setup pending |
+| 2 | cms-takaful | Priority 1–3 ✅ Deployed. Timezone fixed. Next: Priority 4 |
 | 3 | win-board | Phase 3 stable — Next: Phase 4 Goal Cascade |
 | 4 | takaful-content-planner | Blocked on Google OAuth |
 | 5 | drtakaful | FAQPage schema ✅ — Next: Phase 3 retheme |
-| — | Project-B | ARCHIVED (Phase 4 GUI pending) |
-| — | rox-bot | ARCHIVED (35% done) |
-| — | bookkeeping (RezTax) | ARCHIVED (pre-deploy review needed) |
+| — | Project-B | ARCHIVED |
+| — | rox-bot | ARCHIVED |
+| — | bookkeeping (RezTax) | ARCHIVED |
 
 ---
-*Session: 2026-06-08 — office laptop. amin-maju built from scratch in one session.*
+*Session: 2026-06-09 — office laptop. Full smoke test + UX polish + Primavera features + both projects pushed.*
