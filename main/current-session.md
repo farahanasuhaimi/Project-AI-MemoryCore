@@ -2,62 +2,62 @@
 *Active working memory for current conversation*
 
 ## Session Context
-**Session Type**: sts-quote — Views complete + Home PC setup
+**Session Type**: sts-quote — Smart Builder + Rate Fixes + Bug Fixes
 **Mood**: Produktif
 **Last Active Project**: sts-quote (`K:\sts-quote` on home PC)
 
 ---
 
-## What Was Done This Session (Home PC, Evening)
+## What Was Done This Session
 
-### Environment Setup
-- Cloned `farahanasuhaimi/sts-quote` → `K:\sts-quote`
-- `.env` configured: MySQL, DB `sts_quote`, password `1234qwer`
-- `composer install` ✅ · `key:generate` ✅ · `npm install` ✅
-- Created DB manually, ran `php artisan migrate --seed --force` ✅
+### Smart Line-Item Builder — fully implemented
+- Migration: `item_type` + `meta` columns added to `quotation_items` ✅ (ran)
+- `QuotationItem` model: fillable + cast updated ✅
+- `QuotationController`: validation + create() updated ✅
+- `edit.blade.php`: Smart Add panel (4 tabs), full Alpine.js component ✅
+- `onRateTypeChange`: auto-updates section_label (OVERTIME suffix) ✅
 
-### Views Completed (all 4 remaining)
-- `packages/edit.blade.php` ✅ — simple edit form
-- `quotations/show.blade.php` ✅ — read-only summary + status actions
-- `quotations/edit.blade.php` ✅ — Alpine.js 6-col builder with rate card auto-fill
-- `quotations/pdf.blade.php` ✅ — STS EDAC DomPDF branded template
+### Rate Card — corrected to real values
+- Site Supervisor OT: 44.08 → **47.75** / SUN_OT → **47.75** / PUB_OT 58.77 → **63.66**
+- Site Safety Supervisor OT: 40.07 → **43.35** / SUN_OT → **43.35** / PUB_OT 53.43 → **57.80**
+- Mechanical Fitter PUB_OT: 46.75 → **46.74**
+- Seeder: `firstOrCreate` → `updateOrCreate` (re-seeding now patches live DB)
+- Seeder re-run: live DB updated ✅
 
-### Bugs Fixed
-- `packages/show.blade.php`: `route('packages.quotations', $package)` → `route('quotations.store', $package)` ✅
-- `quotations/show.blade.php`: `route('quotations.mark-final')` → `route('quotations.final')` ✅
-
-### Unresolved
-- Nufa mentioned "cannot read what is written here" at session end — unclear if she meant the CLI/terminal output or something in the app UI. Clarify at next session start.
+### Calculation Bugs Fixed
+- Cost Plus rowTotal: now returns `cost × (1 + markup%/100)` — full charge, not markup-only
+- T&C percentage base: now excludes cost_plus rows (matches real quotation structure)
 
 ---
 
 ## Project State — sts-quote
 
-### What's Ready
+### What's Done
 - Full scaffold: migrations, models, seeders, controllers, routes ✅
-- All views written: packages, clients, projects, rate-card, quotations ✅
-- DB seeded: 3 roles, 3 test users, 6 rate categories, 7 rate items ✅
-- Home PC environment fully set up ✅
+- All views: clients, projects, packages, quotations (edit + show + pdf) ✅
+- Smart Add builder: Manpower, Scaffolding, T&C%, Cost Plus ✅
+- DB: migrated + seeded with real rates ✅
 
-### What's Next
-1. **First-run test** (highest priority):
-   - `php artisan serve` + `npm run dev`
-   - Login as `pm@stsedac.com` / `password`
-   - Full flow: create client → project → package → Rev 1 → fill items → submit → approve → mark final → download PDF
-2. Fix any issues found during test
-3. Phase 2 planning: Expense Ledger + Claims
+### What's Next (priority order)
+1. **Smoke test Smart Add**: Mechanical Fitter 18 NOR + 2 SUN + 1 PH + 700 OT → verify totals → save → reload → check meta
+2. **PDF view** (`quotations/pdf.blade.php`): use `$item->total` directly; handle percentage/cost_plus display
+3. **Cleanup temp code**:
+   - Remove CSRF bypass for `/clients` in `bootstrap/app.php`
+   - Remove `/dev/reset` route in `routes/web.php`
+   - Remove `\Log::info` debug lines in `ClientController.php`
+4. **Phase 2 planning**: Expense Ledger + Claims
 
 ---
 
 ## Project Portfolio
 | Pos | Project | Status |
 |-----|---------|--------|
-| 1 | sts-quote | **Views 100% done** — ready for first-run test |
-| 2 | amin-maju | Smoke test ✅ All 4 phases · Security fixes done · Next: Hostinger deploy |
-| 3 | cms-takaful | Priority 1–3 ✅ Deployed. Next: Priority 4 |
-| 4 | win-board | Phase 3 stable — Next: Phase 4 Goal Cascade |
+| 1 | sts-quote | Smart Builder done · Next: smoke test + PDF fix + cleanup |
+| 2 | amin-maju | Smoke test ✅ · Security done · Next: Hostinger deploy |
+| 3 | cms-takaful | Priority 1–3 ✅ Deployed · Next: Priority 4 |
+| 4 | win-board | Phase 3 stable · Next: Phase 4 Goal Cascade |
 | 5 | takaful-content-planner | Blocked on Google OAuth |
-| 6 | drtakaful | FAQPage schema ✅ — Next: Phase 3 retheme |
+| 6 | drtakaful | FAQPage schema ✅ · Next: Phase 3 retheme |
 
 ---
-*Session: 2026-06-10 home PC (evening) — sts-quote views complete, DB ready. Next: first-run test.*
+*Session: 2026-06-10 home PC (evening continuation) — Smart builder complete, rate corrections applied, calculation bugs fixed.*
