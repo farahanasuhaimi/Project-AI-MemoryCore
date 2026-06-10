@@ -2,85 +2,57 @@
 *Active working memory for current conversation*
 
 ## Session Context
-**Session Type**: sts-quote — New project scaffold (office laptop)
+**Session Type**: sts-quote — Views complete + Home PC setup
 **Mood**: Produktif
-**Last Active Project**: sts-quote (`D:\Kerja\Codes\sts-quote`)
+**Last Active Project**: sts-quote (`K:\sts-quote` on home PC)
 
 ---
 
-## What Was Done
+## What Was Done This Session (Home PC, Evening)
 
-### New Project: sts-quote
-System for sister's company (STS EDAC Engineering Sdn Bhd) — centralized quotation management for oil & gas maintenance projects.
+### Environment Setup
+- Cloned `farahanasuhaimi/sts-quote` → `K:\sts-quote`
+- `.env` configured: MySQL, DB `sts_quote`, password `1234qwer`
+- `composer install` ✅ · `key:generate` ✅ · `npm install` ✅
+- Created DB manually, ran `php artisan migrate --seed --force` ✅
 
-**Stack**: Laravel 12, MySQL, Tailwind, Breeze, Spatie Permission, DomPDF
+### Views Completed (all 4 remaining)
+- `packages/edit.blade.php` ✅ — simple edit form
+- `quotations/show.blade.php` ✅ — read-only summary + status actions
+- `quotations/edit.blade.php` ✅ — Alpine.js 6-col builder with rate card auto-fill
+- `quotations/pdf.blade.php` ✅ — STS EDAC DomPDF branded template
 
-**Roles**: PM (highest) → Planner → Admin/Clerk (lowest)
+### Bugs Fixed
+- `packages/show.blade.php`: `route('packages.quotations', $package)` → `route('quotations.store', $package)` ✅
+- `quotations/show.blade.php`: `route('quotations.mark-final')` → `route('quotations.final')` ✅
 
-### Phase 1A ✅ — Scaffold
-- Laravel 12 created at `D:\Kerja\Codes\sts-quote`
-- Packages installed: breeze, spatie/laravel-permission, barryvdh/laravel-dompdf
-- MySQL DB: `sts_quote` (password: 1234qwer)
-
-### Phase 1B ✅ — Migrations + Models + Seeders
-All migrations ran successfully:
-- users (+ is_active), clients, projects
-- rate_categories, rate_items, rate_item_proposals
-- quotation_packages, quotations, quotation_items
-
-Models created:
-- User (HasRoles), Client, Project
-- RateCategory, RateItem, RateItemProposal
-- QuotationPackage, Quotation, QuotationItem
-
-Seeders ran:
-- 3 roles: pm, planner, admin
-- 3 test users: pm@stsedac.com / planner@stsedac.com / admin@stsedac.com (all password: `password`)
-- 6 rate categories seeded
-- 7 sample rate items (Maintenance Planner, Site Supervisor, Site Safety Supervisor, Work Leader, Mechanical Fitter, Hydrojetter, Insulator)
-
-### Phase 1C ✅ — Controllers + Routes
-All 6 controllers written:
-- DashboardController, UserController, ClientController, ProjectController
-- RateCardController (with proposal flow), QuotationPackageController, QuotationController
-
-Routes: `D:\Kerja\Codes\sts-quote\routes\web.php`
-
-### Phase 1C/D — Views (Partial)
-Views written:
-- dashboard.blade.php ✅
-- users/ (index, create, edit) ✅
-- clients/ (index, create, edit) ✅
-- projects/ (index, create, edit) ✅
-- rate-card/ (index, create, edit, proposals) ✅
-- packages/ (index, create, show) ✅
-- components/flash.blade.php ✅
+### Unresolved
+- Nufa mentioned "cannot read what is written here" at session end — unclear if she meant the CLI/terminal output or something in the app UI. Clarify at next session start.
 
 ---
 
-## Remaining (Continue from Home PC)
+## Project State — sts-quote
 
-### Views Still Needed
-1. `resources/views/packages/edit.blade.php` — simple edit form
-2. `resources/views/quotations/show.blade.php` — read-only summary view
-3. `resources/views/quotations/edit.blade.php` — **heaviest** — 6-section builder with Alpine.js dynamic rows + rate card picker
-4. `resources/views/quotations/pdf.blade.php` — DomPDF template matching STS EDAC quote format (logo, header, line items, totals)
+### What's Ready
+- Full scaffold: migrations, models, seeders, controllers, routes ✅
+- All views written: packages, clients, projects, rate-card, quotations ✅
+- DB seeded: 3 roles, 3 test users, 6 rate categories, 7 rate items ✅
+- Home PC environment fully set up ✅
 
-### Known Bug to Fix
-- `packages/show.blade.php` references `route('packages.quotations', $package)` but the correct route name is `quotations.store` with param `package`
-- Fix: `route('quotations.store', $package)` — update in the show view
-
-### After Views
-- Run `php artisan serve` + `npm run dev`
-- Test login as pm@stsedac.com
-- Create client → project → package → Rev 1 → fill items → submit → clone → Rev 2 → mark final → download PDF
+### What's Next
+1. **First-run test** (highest priority):
+   - `php artisan serve` + `npm run dev`
+   - Login as `pm@stsedac.com` / `password`
+   - Full flow: create client → project → package → Rev 1 → fill items → submit → approve → mark final → download PDF
+2. Fix any issues found during test
+3. Phase 2 planning: Expense Ledger + Claims
 
 ---
 
 ## Project Portfolio
 | Pos | Project | Status |
 |-----|---------|--------|
-| 1 | sts-quote | **In progress** — Views 70% done, quotation builder + PDF remaining |
+| 1 | sts-quote | **Views 100% done** — ready for first-run test |
 | 2 | amin-maju | Smoke test ✅ All 4 phases · Security fixes done · Next: Hostinger deploy |
 | 3 | cms-takaful | Priority 1–3 ✅ Deployed. Next: Priority 4 |
 | 4 | win-board | Phase 3 stable — Next: Phase 4 Goal Cascade |
@@ -88,4 +60,4 @@ Views written:
 | 6 | drtakaful | FAQPage schema ✅ — Next: Phase 3 retheme |
 
 ---
-*Session: 2026-06-10 office laptop — sts-quote Phase 1 scaffold complete, views 70% done. Continue from home PC.*
+*Session: 2026-06-10 home PC (evening) — sts-quote views complete, DB ready. Next: first-run test.*
