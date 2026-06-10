@@ -2,78 +2,90 @@
 *Active working memory for current conversation*
 
 ## Session Context
-**Session Type**: amin-maju — Full code review + P1/P2/P3 security & quality fixes (office laptop)
+**Session Type**: sts-quote — New project scaffold (office laptop)
 **Mood**: Produktif
-**Last Active Project**: amin-maju (`D:\Kerja\Codes\amin-maju` on office laptop)
+**Last Active Project**: sts-quote (`D:\Kerja\Codes\sts-quote`)
 
 ---
 
 ## What Was Done
 
-### Smoke Test — All 4 Phases Complete ✅
-- **Phase 1 (Regression)**: ✅ Auth, Projects, Tasks
-- **Phase 2 (Contact Directory)**: ✅ Kenalan sidebar
-- **Phase 3 (Auto-suggest ClientPayment)**: ✅ Cipta Bayaran button + direction save
-- **Phase 4 (Milestone Labels)**: ✅ Verified via subagent (Playwright) — save, persist, client payment dropdown, blank fallback all pass
+### New Project: sts-quote
+System for sister's company (STS EDAC Engineering Sdn Bhd) — centralized quotation management for oil & gas maintenance projects.
 
-### Code Review (Subagent)
-Full codebase review identified P1/P2/P3 issues across controllers, views, routes, and models.
+**Stack**: Laravel 12, MySQL, Tailwind, Breeze, Spatie Permission, DomPDF
 
-### P1 Fixes (commit `a035a9f`)
-1. IDOR — `abort_if` ownership checks on all nested resources (5 controllers)
-2. `phase_id` scoped to current project via `Rule::exists` in TaskController
-3. `task_id` scoped to current project in InfoContactController + QuotationController
-4. Owner self-deactivation guard in UserController
-5. Session invalidate + regenerateToken on inactive account login
-6. XSS — replaced `addslashes()` with `Js::from()` in show.blade.php (Alpine x-data)
+**Roles**: PM (highest) → Planner → Admin/Clerk (lowest)
 
-### P2 Fixes (commit `b04ded8`)
-1. Dashboard outstanding balance scoped to active/planning/on-hold projects only
-2. Workers blocked from editing tasks not assigned to them (403)
-3. Login throttle: 6 attempts/minute
-4. Delete (✕) buttons added to Finance tab rows (client payments, expenses, wages)
-5. Flash message shown when InfoContact auto-saves new Kenalan entry
+### Phase 1A ✅ — Scaffold
+- Laravel 12 created at `D:\Kerja\Codes\sts-quote`
+- Packages installed: breeze, spatie/laravel-permission, barryvdh/laravel-dompdf
+- MySQL DB: `sts_quote` (password: 1234qwer)
 
-### P3 Fixes (commit `64bc8b0`)
-1. Worker dashboard end-of-week fixed to Saturday (Carbon::SATURDAY)
-2. Project create wrapped in DB::transaction() (phase seeding safety)
-3. `contacts.type` changed from string to enum (migration ran)
-4. Quotation `task_id` now updatable on edit
-5. `is_active` checkbox uses `old()` in user edit form
+### Phase 1B ✅ — Migrations + Models + Seeders
+All migrations ran successfully:
+- users (+ is_active), clients, projects
+- rate_categories, rate_items, rate_item_proposals
+- quotation_packages, quotations, quotation_items
 
-### README Updated
-Added Security section documenting all protections applied.
+Models created:
+- User (HasRoles), Client, Project
+- RateCategory, RateItem, RateItemProposal
+- QuotationPackage, Quotation, QuotationItem
 
-### Commits Pushed
-- `87abf63` — smoke test fixes (Kenalan sidebar + InfoContact UX)
-- `61e9194` — quotation direction save + incoming quotes + summary bar
-- `a035a9f` — P1 security fixes
-- `b04ded8` — P2 improvements
-- `64bc8b0` — P3 polish
+Seeders ran:
+- 3 roles: pm, planner, admin
+- 3 test users: pm@stsedac.com / planner@stsedac.com / admin@stsedac.com (all password: `password`)
+- 6 rate categories seeded
+- 7 sample rate items (Maintenance Planner, Site Supervisor, Site Safety Supervisor, Work Leader, Mechanical Fitter, Hydrojetter, Insulator)
 
----
+### Phase 1C ✅ — Controllers + Routes
+All 6 controllers written:
+- DashboardController, UserController, ClientController, ProjectController
+- RateCardController (with proposal flow), QuotationPackageController, QuotationController
 
-## Current State
-- amin-maju: fully smoke-tested, all P1/P2/P3 addressed, pushed to GitHub
-- Office laptop DB: has contacts type enum migration applied
-- `php artisan serve` + `npm run dev` running on office laptop
+Routes: `D:\Kerja\Codes\sts-quote\routes\web.php`
+
+### Phase 1C/D — Views (Partial)
+Views written:
+- dashboard.blade.php ✅
+- users/ (index, create, edit) ✅
+- clients/ (index, create, edit) ✅
+- projects/ (index, create, edit) ✅
+- rate-card/ (index, create, edit, proposals) ✅
+- packages/ (index, create, show) ✅
+- components/flash.blade.php ✅
 
 ---
 
-## Next Up
-1. **Hostinger subdomain + auto-deploy setup** for amin-maju
-2. **Review P2-2** — potential sub-contractor double-count in `totalExpenses()` (skipped, was deliberate design)
-3. **Change seed credentials** before production seed
-4. **cms-takaful Priority 4**
+## Remaining (Continue from Home PC)
+
+### Views Still Needed
+1. `resources/views/packages/edit.blade.php` — simple edit form
+2. `resources/views/quotations/show.blade.php` — read-only summary view
+3. `resources/views/quotations/edit.blade.php` — **heaviest** — 6-section builder with Alpine.js dynamic rows + rate card picker
+4. `resources/views/quotations/pdf.blade.php` — DomPDF template matching STS EDAC quote format (logo, header, line items, totals)
+
+### Known Bug to Fix
+- `packages/show.blade.php` references `route('packages.quotations', $package)` but the correct route name is `quotations.store` with param `package`
+- Fix: `route('quotations.store', $package)` — update in the show view
+
+### After Views
+- Run `php artisan serve` + `npm run dev`
+- Test login as pm@stsedac.com
+- Create client → project → package → Rev 1 → fill items → submit → clone → Rev 2 → mark final → download PDF
+
+---
 
 ## Project Portfolio
 | Pos | Project | Status |
 |-----|---------|--------|
-| 1 | amin-maju | Smoke test ✅ All 4 phases · Security fixes done · Next: Hostinger deploy |
-| 2 | cms-takaful | Priority 1–3 ✅ Deployed. Next: Priority 4 |
-| 3 | win-board | Phase 3 stable — Next: Phase 4 Goal Cascade |
-| 4 | takaful-content-planner | Blocked on Google OAuth |
-| 5 | drtakaful | FAQPage schema ✅ — Next: Phase 3 retheme |
+| 1 | sts-quote | **In progress** — Views 70% done, quotation builder + PDF remaining |
+| 2 | amin-maju | Smoke test ✅ All 4 phases · Security fixes done · Next: Hostinger deploy |
+| 3 | cms-takaful | Priority 1–3 ✅ Deployed. Next: Priority 4 |
+| 4 | win-board | Phase 3 stable — Next: Phase 4 Goal Cascade |
+| 5 | takaful-content-planner | Blocked on Google OAuth |
+| 6 | drtakaful | FAQPage schema ✅ — Next: Phase 3 retheme |
 
 ---
-*Session: 2026-06-10 office laptop — smoke test Phase 4 + full code review + P1/P2/P3 fixes. Ready for Hostinger deploy.*
+*Session: 2026-06-10 office laptop — sts-quote Phase 1 scaffold complete, views 70% done. Continue from home PC.*
