@@ -1,25 +1,26 @@
 # Current Session Memory - 2026-06-13 (Home PC)
-*Prepared for next session — last updated 14:40*
+*Prepared for next session — last updated 17:00*
 
 ## Last Session
 **Date**: 2026-06-13 afternoon
 **Machine**: Home PC
-**Focus**: sts-projex Phase 2A — expenses/claims/payments DB layer
+**Focus**: sts-projex Phase 2 complete (2A–2F)
 
 ### What Was Done
-- Committed leftover Phase 1 work (PM onboarding banner + Staff link fix) — pushed to remote
-- Created migrations: `expenses`, `claims`, `payments` — all 3 landed cleanly
-- Created models: `Expense`, `Claim`, `Payment` with full relationships and casts
-- Updated `Project` and `Quotation` models: added `hasMany(Expense)`
-- Verified via tinker: all table names correct, relationship methods exist on models
-- Committed + pushed Phase 2A
+- Committed Phase 1 leftovers (PM onboarding banner + Staff link fix)
+- **Phase 2A**: migrations (expenses, claims, payments) + models (Expense, Claim, Payment)
+- **Phase 2B**: `markFinal` auto-creates expense rows grouped by category from quotation items
+- **Phase 2C**: Claim submission form + PM approve/reject + dashboard indigo badge
+- **Phase 2D**: PaymentController — inline payment form on claims page, expense status auto-updates to paid/partial
+- **Phase 2E**: `projects/{project}/expenses` — summary cards + expense table with category badges + Claim link
+- **Phase 2F**: Dashboard expense summary table per project (quoted/pending/paid + progress bar)
+- `ProjectQuotationSeeder` added — 1 client, 1 project, 1 package, 3 quotations (draft/submitted/final), 8 line items
 
 ### What's Next (start here next session)
-1. **Phase 2B — Auto-populate expenses on quotation Final**
-   - When PM marks quotation as Final → auto-create expense entries from quotation line items (grouped by category)
-   - Each section (manpower, equipment, etc.) becomes its own expense row
-   - Expense linked back to source quotation for traceability
-2. **Phase 2C — Claim submission UI + PM badge**
+- **Phase 3** — TBD (check TASK.md for Phase 3 scope)
+- Consider: navigation link to Claims page from nav bar
+
+---
 
 ---
 
@@ -39,7 +40,12 @@
 | Package archive toggle | ✅ |
 | Expense ledger — receipt log + quoted vs actual + PDF | ✅ |
 | PM onboarding banner (dashboard) | ✅ |
-| expenses/claims/payments migrations + models | ✅ (Phase 2A done) |
+| expenses/claims/payments migrations + models | ✅ Phase 2A |
+| Auto-populate expenses on Final (2B) | ✅ Phase 2B |
+| Claim submission + PM approve/reject (2C) | ✅ Phase 2C |
+| Payment recording + expense status update (2D) | ✅ Phase 2D |
+| Project expenses index view (2E) | ✅ Phase 2E |
+| Dashboard expense summary + progress bar (2F) | ✅ Phase 2F |
 
 ---
 
@@ -51,7 +57,7 @@
 ## Project Portfolio
 | Pos | Project | Status |
 |-----|---------|--------|
-| 1 | sts-projex | Phase 2A complete · Next: Phase 2B — auto-populate expenses on Final |
+| 1 | sts-projex | Phase 2 complete · Next: Phase 3 (check TASK.md) |
 | 2 | amin-maju | Smoke test ✅ · Security done · Next: Hostinger deploy |
 | 3 | cms-takaful | Priority 1–3 ✅ Deployed · Next: Priority 4 |
 | 4 | win-board | Phase 3 stable · Next: Phase 4 Goal Cascade |
