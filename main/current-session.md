@@ -1,30 +1,37 @@
-# Current Session Memory - 2026-06-13 (Home PC)
-*Prepared for next session — last updated 17:00*
+# Current Session Memory - 2026-06-14 (Home PC)
+*Prepared for next session — last updated 19:13*
 
 ## Last Session
-**Date**: 2026-06-13 afternoon
+**Date**: 2026-06-14 evening
 **Machine**: Home PC
-**Focus**: sts-projex Phase 2 complete (2A–2F)
+**Focus**: sts-projex — security hardening + UI polish + docs update
 
 ### What Was Done
-- Committed Phase 1 leftovers (PM onboarding banner + Staff link fix)
-- **Phase 2A**: migrations (expenses, claims, payments) + models (Expense, Claim, Payment)
-- **Phase 2B**: `markFinal` auto-creates expense rows grouped by category from quotation items
-- **Phase 2C**: Claim submission form + PM approve/reject + dashboard indigo badge
-- **Phase 2D**: PaymentController — inline payment form on claims page, expense status auto-updates to paid/partial
-- **Phase 2E**: `projects/{project}/expenses` — summary cards + expense table with category badges + Claim link
-- **Phase 2F**: Dashboard expense summary table per project (quoted/pending/paid + progress bar)
-- `ProjectQuotationSeeder` added — 1 client, 1 project, 1 package, 3 quotations (draft/submitted/final), 8 line items
+- **Navbar redesigned** → then reverted to original Breeze style (Nufa preferred default). Kept: `PM` brand name + role-based tab hiding
+- **App renamed**: "STS Quote" → "PM" (`APP_NAME` + navbar branding)
+- **Security audit** (subagent): 4 CRITICAL, 6 HIGH, 7 MEDIUM found and fixed
+  - Removed public self-registration
+  - `EnsureUserIsActive` middleware created + registered
+  - PM-only approve/reject with self-approval block
+  - Access checks added to PackageExpense + QuotationPackage controllers
+  - `markFinal` race condition fixed + null-category guard
+  - Claim/payment amount caps corrected
+  - `Claim::$fillable` tightened (removed `approved_by`, `approved_at`)
+- **Rate Card tab hidden** from planner role (`@hasanyrole('pm|admin')`)
+- **README.md + TASK.md** fully updated (Phase 2 complete, security section added, branding updated)
 
 ### What's Next (start here next session)
-- **Phase 3** — TBD (check TASK.md for Phase 3 scope)
-- Consider: navigation link to Claims page from nav bar
+- **Phase 3** — Reporting & Compilation (check TASK.md for full scope)
+  - 3A: Per-project summary PDF
+  - 3B: Quotation revision comparison
+  - 3C: Rate card change history
+  - 3D: Financial summary Excel export
+  - 3E: Dashboard v2 with PM overview + filters
+- Consider: Claims nav link (was flagged as "consider" in Phase 2)
 
 ---
 
----
-
-## Project State — sts-projex (Phase 1 Complete + Home PC Ready)
+## Project State — sts-projex (Phase 2 Complete + Security Hardened)
 
 | Feature | Status |
 |---------|--------|
@@ -33,19 +40,15 @@
 | Client / Project / Package CRUD | ✅ |
 | Client inactive + Project archive toggles | ✅ |
 | Project staff assignment (PM approval) | ✅ |
-| Staff link in Projects index | ✅ (fixed this session) |
 | Smart Add: Manpower/Equipment/Scaffolding/T&C%/Cost Plus | ✅ |
 | Quotation workflow (submit → approve → final) | ✅ |
 | PDF — section ordering + typed row expansion | ✅ |
-| Package archive toggle | ✅ |
 | Expense ledger — receipt log + quoted vs actual + PDF | ✅ |
 | PM onboarding banner (dashboard) | ✅ |
-| expenses/claims/payments migrations + models | ✅ Phase 2A |
-| Auto-populate expenses on Final (2B) | ✅ Phase 2B |
-| Claim submission + PM approve/reject (2C) | ✅ Phase 2C |
-| Payment recording + expense status update (2D) | ✅ Phase 2D |
-| Project expenses index view (2E) | ✅ Phase 2E |
-| Dashboard expense summary + progress bar (2F) | ✅ Phase 2F |
+| Expenses/Claims/Payments — full Phase 2 flow | ✅ |
+| Dashboard expense summary + progress bar | ✅ |
+| Security hardening — all CRITICAL + HIGH fixed | ✅ |
+| App renamed to PM, navbar role-aware | ✅ |
 
 ---
 
@@ -57,12 +60,9 @@
 ## Project Portfolio
 | Pos | Project | Status |
 |-----|---------|--------|
-| 1 | sts-projex | Phase 2 complete · Next: Phase 3 (check TASK.md) |
+| 1 | sts-projex | Phase 2 complete + security hardened · Next: Phase 3 |
 | 2 | amin-maju | Smoke test ✅ · Security done · Next: Hostinger deploy |
 | 3 | cms-takaful | Priority 1–3 ✅ Deployed · Next: Priority 4 |
 | 4 | win-board | Phase 3 stable · Next: Phase 4 Goal Cascade |
 | 5 | takaful-content-planner | Blocked on Google OAuth |
 | 6 | drtakaful | FAQPage schema ✅ · Next: Phase 3 retheme |
-
----
-*End of session 2026-06-13 early morning. Home PC setup done, onboarding banner shipped. Next: Phase 2A.*
